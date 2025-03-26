@@ -31,10 +31,10 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="about.html">O nás</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">Služby</a></li>
-                        <li class="nav-item"><a class="nav-link" href="review.html">Reference</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Kontakty</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Domů</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">O nás</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Služby</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Kontakt</a></li>
                     </ul>
                 </div>
             </div>
