@@ -1,0 +1,4 @@
+# Ignorování souboru .env
+.env
+.venv/
+.idea/
