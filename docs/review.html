@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <img src="static/images/sedivak_logo.avif" alt="Šedivák Elektro logo">
+                    <img src="static/images/logo4.png" alt="Šedivák Elektro logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -40,85 +40,108 @@
             </div>
         </nav>
         <!-- Recenze-->
-        <section class="page-section" id="reviews-container">
-            <div class="container"> 
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Recenze z Google </h2>
-                    <img class="rounded-circle img-fluid" src="../static/images/icons8google.avif" alt="logo_goole" />
-                </div>
-                <div id="reviews-carousel"> <div id="reviews" class="reviews-list"></div> <div class="carousel-controls">
-                        <button id="prev-review"><i class="fas fa-chevron-left"></i></button>
-                        <button id="next-review"><i class="fas fa-chevron-right"></i></button>
-                    </div>
-                </div>
+        <section class="page-section">
+            <div class="container">
+              <div class="text-center">
+                <h2 class="section-heading text-uppercase">Reference</h2>
+                <h3 class="section-subheading text-muted">
+                  Máme za sebou desítky úspěšně dokončených projektů, od rodinných domů,
+                  přes bytové komplexy až po rozsáhlé firemní objekty. Ke každé instalaci
+                  přistupujeme s maximální precizností a péčí.
+                </h3>
+              </div>
             </div>
+          
+            <div class="container py-4">
+              <!-- Doubravka -->
+              <div class="row text-center">
+                <div class="col-12">
+                  <h4 class="section-heading text-uppercase text-start">Doubravka</h4>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/doubravka1.jpg" alt="Instalace pro bytové domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/doubravka.jpg" alt="Instalace pro bytové domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/doubravka3.jpg" alt="Instalace pro bytové domy" />
+                </div>
+              </div>
+          
+              <!-- Kyšice -->
+              <div class="row text-center">
+                <div class="col-12">
+                  <h4 class="section-heading text-uppercase text-start">Kyšice</h4>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/kysice3.jpg" alt="Instalace pro rodinné domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/kysice.jpg" alt="Instalace pro bytové domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/kysice2.jpg" alt="Instalace pro rodinné domy" />
+                </div>
+              </div>
+          
+              <!-- Černice -->
+              <div class="row text-center">
+                <div class="col-12">
+                  <h4 class="section-heading text-uppercase text-start">Černice</h4>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/cernice1.jpg" alt="Instalace pro rodinné domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/cernice2.jpg" alt="Instalace pro bytové domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/cernice3.jpg" alt="Instalace pro rodinné domy" />
+                </div>
+              </div>
+          
+              <!-- Šumava -->
+              <div class="row text-center">
+                <div class="col-12">
+                  <h4 class="section-heading text-uppercase text-start">Šumava</h4>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/sumava2.jpg" alt="Instalace pro rodinné domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/sumava1.jpg" alt="Instalace pro bytové domy" />
+                </div>
+                <div class="col-md-4 mb-4">
+                  <img class="responsive-img rounded zoom-img" src="static/images/sumava3.jpg" alt="Instalace pro rodinné domy" />
+                </div>
+              </div>
+            </div>
+         
+                <div class="text-center">
+                    <a class="btn btn-button btn-xl text-uppercase" href="contact.html">Kontaktovat</a>
+                </div>
+                <div class="text-center">
+                    <h5 >Mohlo by vas také zajímat?</h5>
+                    <a href="services.html" style="text-decoration: underline;">FVE pro bytove domy<br></a>
+                    <a href="index.html#reviews-container" style="text-decoration: underline;">Recenze Google</a>
+                </div>   
         </section>
         
-        <script>
-            fetch("https://kontaktni-formular-90c92756f50f.herokuapp.com/reviews")
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        document.getElementById('reviews').innerHTML = `<p>Chyba: ${data.error}</p>`;
-                    } else {
-                        let reviewsContainer = document.getElementById("reviews");
-                        reviewsContainer.innerHTML = "";
-            
-                        data.forEach(review => {
-                            let reviewElement = document.createElement("div");
-                            reviewElement.classList.add("review");
-            
-                            // Funkce pro generování hvězdiček na základě hodnocení
-                            const generateStars = (rating) => {
-                                let stars = '';
-                                for (let i = 0; i < 5; i++) {
-                                    stars += `<i class="${i < rating ? 'fas fa-star' : 'far fa-star'}"></i>`;
-                                }
-                                return stars;
-                            };
-            
-                            reviewElement.innerHTML = `
-                                <h3><i class="fas fa-user"></i> ${review.author}</h3>
-                                <div class="stars">${generateStars(review.rating)}</div>
-                                <p class="date">Datum: ${new Date(review.date).toLocaleDateString()}</p>
-                                <p>${review.text}</p> 
-                            `;
-            
-                            reviewsContainer.appendChild(reviewElement);
-                        });
-                        initCarousel(); // Inicializujeme listování po načtení recenzí
-                    }
-                })
-                .catch(error => {
-                    document.getElementById('reviews').innerHTML = `<p>Chyba při načítání recenzí.</p>`;
-                    console.error("Chyba při načítání recenzí:", error);
-                });
-        
-            function initCarousel() {
-                const reviewsList = document.querySelector('.reviews-list');
-                const reviews = document.querySelectorAll('.review');
-                const reviewWidth = reviews[0].offsetWidth; // Šířka jedné recenze
-                let currentIndex = 0;
-        
-                document.getElementById('next-review').addEventListener('click', () => {
-                    if (currentIndex < reviews.length - 1) {
-                        currentIndex++;
-                        reviewsList.style.transform = `translateX(-${currentIndex * reviewWidth}px)`;
-                    }
-                });
-        
-                document.getElementById('prev-review').addEventListener('click', () => {
-                    if (currentIndex > 0) {
-                        currentIndex--;
-                        reviewsList.style.transform = `translateX(-${currentIndex * reviewWidth}px)`;
-                    }
-                });
-            }
-        </script>
-
            <!-- Footer-->
            <footer class="footer py-4">
             <div class="container">
+                <div class="contacts">
+                    <a href="mailto:info@sedivakelektro.cz">
+                        <i class="fa-solid fa-envelope fa-2x"></i> info@sedivakelektro.cz <br>
+                    </a>
+                    <a href="tel:+420739056068">
+                        <i class="fa-solid fa-phone fa-2x"></i> +420 739 056 068 <br>
+                    </a>
+                    <a href="https://mapy.cz/zakladni?source=addr&id=11781890&ds=1&x=13.4986051&y=49.7654102&z=17" target="_blank">
+                        <i class="fa-solid fa-map-marker-alt fa-2x"></i> Dýšina 297 Hala č.40 330 02
+                    </a>
+                </div>
                 <div class="row align-items-center">
                     <div class="col-lg-4 text-lg-start">Copyright © 2025 Šedivák Elektro s.r.o.</div>   
                     <div class="col-lg-4 my-3 my-lg-0">
@@ -132,7 +155,7 @@
                 </div>
             </div>
         </footer>
-
+<!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="static/js/scripts.js"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
