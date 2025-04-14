@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <img src="static/images/logo4.png" alt="Šedivák Elektro logo">
+                    <img src="static/images/logo.avif" alt="Šedivák Elektro logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
@@ -52,26 +52,26 @@
             <div class="row text-center">
               <div class="col-md-4 mb-4">
                 <h4 class="section-heading text-uppercase">Instalace pro rodinné domy</h4>
-                <a href="services.html">
+                <a href="rodinnedomy.html">
                 <img class="img-fluid rounded" src="static/images/dum.jpg" alt="Instalace pro rodinné domy" />
                 </a>
-                <a class="btn btn-primary btn-xl text-uppercase mt-3" href="services.html">více informací</a>
+                <a class="btn btn-primary btn-xl text-uppercase mt-3" href="rodinnedomy.html">více informací</a>
               </div>
           
               <div class="col-md-4 mb-4">
                 <h4 class="section-heading text-uppercase">Instalace pro bytové domy</h4>
-                <a href="services.html">
+                <a href="bytovedomy.html">
                 <img class="img-fluid rounded" src="static/images/dum2.jpg" alt="Instalace pro bytové domy" />
                 </a>
-                <a class="btn btn-primary btn-xl text-uppercase mt-3" href="services.html">více informací</a>
+                <a class="btn btn-primary btn-xl text-uppercase mt-3" href="bytovedomy.html">více informací</a>
               </div>
           
               <div class="col-md-4 mb-4">
                 <h4 class="section-heading text-uppercase">Instalace pro firmy      </h4>
-                <a href="services.html">
+                <a href="firmy.html">
                 <img class="img-fluid rounded" src="static/images/firma.jpg" alt="Instalace pro firmy" />
                 </a>
-                <a class="btn btn-primary btn-xl text-uppercase mt-3" href="services.html">více informací</a>
+                <a class="btn btn-primary btn-xl text-uppercase mt-3" href="firmy.html">více informací</a>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
     <div class="container"> 
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Recenze z Google </h2>
-            <img class="rounded-circle img-fluid" src="../static/images/icons8google.avif" alt="logo_goole" />
+            <img class="rounded-circle img-fluid" src="../static/images/icons8google.jpg" alt="logo_goole" />
         </div>
         <div id="reviews-carousel"> 
             <div id="reviews" class="reviews-list"></div> 
@@ -94,7 +94,7 @@
 </section>
 
 <script>
-    fetch("https://kontaktni-formular-90c92756f50f.herokuapp.com/reviews")
+    fetch("https:/websedivak-c4c7a7634080.herokuapp.com/reviews")
         .then(response => response.json())
         .then(data => {
             if (data.error) {
