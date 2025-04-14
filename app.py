@@ -170,6 +170,18 @@ def services():
 def contact():
     return render_template('contact.html')
 
+@app.route('/rodinnedomy')
+def contact():
+    return render_template('rodinnedomy.html')
+
+@app.route('/bytovedomy')
+def contact():
+    return render_template('bytovedomy.html')
+
+@app.route('/firmy')
+def contact():
+    return render_template('firmy.html')
+
 # ✅ Spuštění aplikace
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
