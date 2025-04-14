@@ -166,20 +166,24 @@ def about():
 def services():
     return render_template('services.html')
 
+@app.route('/review')
+def review():
+    return render_template('review.html')
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
 @app.route('/rodinnedomy')
-def contact():
+def rodinnedomy():
     return render_template('rodinnedomy.html')
 
 @app.route('/bytovedomy')
-def contact():
+def bytovedomy():
     return render_template('bytovedomy.html')
 
 @app.route('/firmy')
-def contact():
+def firmy():
     return render_template('firmy.html')
 
 # ✅ Spuštění aplikace
