@@ -81,7 +81,7 @@
     <div class="container"> 
         <div class="text-center">
             <h2 class="section-heading text-uppercase">Recenze z Google </h2>
-            <img class="rounded-circle img-fluid" src="../static/images/icons8google.jpg" alt="logo_goole" />
+            <img class="rounded-circle img-fluid" src="static/images/icons8google.png" alt="logo_goole" />
         </div>
         <div id="reviews-carousel"> 
             <div id="reviews" class="reviews-list"></div> 
@@ -94,7 +94,7 @@
 </section>
 
 <script>
-    fetch("https:/websedivak-c4c7a7634080.herokuapp.com/reviews")
+     fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")
         .then(response => response.json())
         .then(data => {
             if (data.error) {
