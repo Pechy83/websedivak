@@ -10963,7 +10963,7 @@ p {
   }
 }
 
-/*header.masthead {
+header.masthead {
   padding-top: 10.5rem;
   padding-bottom: 6rem;
   text-align: center;
@@ -10972,28 +10972,7 @@ p {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-} */
-.masthead {
-  position: relative;
-  text-align: center;
-  color: white;
-}
-
-.masthead-img {
-  width: 100%;
-  height: auto;
-  max-width: 100vh;
-  object-fit: cover;
-  filter: brightness(60%); /* tmavší kvůli lepší čitelnosti textu */
-}
-
-.masthead-overlay {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
+} 
 
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
