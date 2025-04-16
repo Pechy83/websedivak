@@ -10967,7 +10967,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: white;
-  background-image: url("../images/uvodni.jpg");
+  background-image: url("../images/uvodni.webp");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -11465,6 +11465,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   --bs-btn-hover-border-color: #3f6ee4;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  border-radius: 50px;
   }
 
   .custom-gap > [class*="col-"] {
