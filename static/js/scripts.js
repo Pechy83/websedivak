@@ -48,8 +48,17 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
-let response = await fetch("https://kontaktni-formular-90c92756f50f.herokuapp.com/submit_form", {
+let response = await fetch("https://websedivak-c4c7a7634080.herokuapp.com/submit_form", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(formData)
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.zoom-img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        this.classList.toggle('zoom-active');
+      });
+    });
+  });
+  
