@@ -11483,9 +11483,11 @@ section#contact form#contactForm :-ms-input-placeholder {
   .zoom-img:hover {
     transform: scale(1.30); /* Zvětšení obrázku*/
   }
-  !!!!!!!!!!!!!!
-  .zoom-img.zoom-active:hover {
-    transform: scale(1.3);
+ 
+  @media (max-width: 768px) {
+    .zoom-img:hover {
+      transform: none; /* Zruší zvětšení na mobilech */
+    }
   }
   
   /* styl pro obrázky */
