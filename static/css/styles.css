@@ -11538,3 +11538,10 @@ section#contact form#contactForm :-ms-input-placeholder {
   .fa-circle-bg {
     background-color: transparent !important;
   }
+
+  .google-logo {
+    width: 80px; /* nebo co potřebuješ */
+    height: auto; /* zachová proporce */
+    border-radius: 50%; /* pokud chceš udržet kulatý tvar */
+    margin: 10px auto;
+}
