@@ -10893,6 +10893,7 @@ p {
 #mainNav { 
   background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%);
   transition: background-color 0.3s ease-in-out;
+  min-height: 64px;
 }
 
 #mainNav .navbar-toggler {
@@ -11413,7 +11414,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 .review h3 i {
-  margin-right: 30px; /* Přidá 5 pixelů odsazení mezi ikonou a jménem */
+  margin-right: 30px; /* Přidá x pixelů odsazení mezi ikonou a jménem */
 }
 
 #reviews-carousel {
