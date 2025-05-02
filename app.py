@@ -76,7 +76,7 @@ def error_response(message, status_code=400):
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     try:
-        data = request.json
+        data = request.get_json(silent=True) or request.form
         name, email, phone, message = map(str.strip, [
             data.get('name', ''),
             data.get('email', ''),
