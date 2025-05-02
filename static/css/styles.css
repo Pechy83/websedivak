@@ -11431,8 +11431,21 @@ section#contact form#contactForm :-ms-input-placeholder {
   box-sizing: border-box;  /* Zahrne padding a border do šířky */
   border: 1px solid #ccc;  /* Viditelný okraj */
   padding: 20px;           /* Vnitřní odsazení */
-  margin: 0;               /* Odstraníme mezery mezi recenzemi */
   scroll-snap-align: start; /* Zarovnání pro scroll snapping (volitelné) */
+}
+
+/* Na tabletech a výš (šířka nad 768px): dvě recenze vedle sebe */
+@media (min-width: 768px) {
+  .review {
+    flex: 0 0 50%;
+  }
+}
+
+/* Na desktopu (šířka nad 1024px): tři recenze vedle sebe */
+@media (min-width: 1024px) {
+  .review {
+    flex: 0 0 33.33%;
+  }
 }
 
 .carousel-controls {

@@ -49,54 +49,57 @@
         </div>
         <div class="contact-wrapper">
             <div class="contact-form">
-                <form id="contactForm" novalidate>
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <!-- Name input-->
-                                <input class="form-control" id="name" type="text" placeholder="Vaše jméno *" required />
-                                <div class="invalid-feedback">Jméno je povinné.</div>
-                            </div>
-                            <div class="form-group">
-                                <!-- Email address input-->
-                                <input class="form-control" id="email" type="email" placeholder="Váš email *" required />
-                                <div class="invalid-feedback">Email je povinný a musí být platný.</div>
-                            </div>
-                            <div class="form-group">
-                                <!-- Phone number input-->
-                                <input class="form-control" id="phone" type="tel" placeholder="Váš telefon *" required />
-                                <div class="invalid-feedback">Telefonní číslo je povinné.</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea">
-                                <!-- Message input-->
-                                <textarea class="form-control" id="message" placeholder="Vaše zpráva *" required></textarea>
-                                <div class="invalid-feedback">Zpráva je povinná.</div>
-                            </div>
-                        </div>
+              <form id="contactForm" action="/submit" method="POST" novalidate>
+                <div class="row align-items-stretch mb-5">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <!-- Name input-->
+                      <input class="form-control" id="name" name="name" type="text" placeholder="Vaše jméno *" required />
+                      <div class="invalid-feedback">Jméno je povinné.</div>
                     </div>
-                    <!-- Submit success message -->
-                    <div class="alert alert-success d-none" id="submitSuccessMessage">
-                        <strong>Zpráva byla úspěšně odeslána!</strong>
+                    <div class="form-group">
+                      <!-- Email address input-->
+                      <input class="form-control" id="email" name="email" type="email" placeholder="Váš email *" required />
+                      <div class="invalid-feedback">Email je povinný a musí být platný.</div>
                     </div>
-                    <!-- Submit error message -->
-                    <div class="alert alert-danger d-none" id="submitErrorMessage">
-                        <strong>Chyba při odesílání zprávy!</strong>
+                    <div class="form-group">
+                      <!-- Phone number input-->
+                      <input class="form-control" id="phone" name="phone" type="tel" placeholder="Váš telefon *" required />
+                      <div class="invalid-feedback">Telefonní číslo je povinné.</div>
                     </div>
-                    <!-- Form with reCAPTCHA -->
-                    <form action="/submit" method="POST">
-                        <!-- reCAPTCHA widget -->
-                        <div class="g-recaptcha" data-sitekey="6LeW_fAqAAAAAN3aeyy2gFrE-QmZg-28g-5FGkea"></div>
-                        <br>
-                        <!-- Submit button -->
-                        <div class="text-center">
-                            <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Odeslat</button>
-                        </div>
-                    </form>
-                </form>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group form-group-textarea">
+                      <!-- Message input-->
+                      <textarea class="form-control" id="message" name="message" placeholder="Vaše zpráva *" required></textarea>
+                      <div class="invalid-feedback">Zpráva je povinná.</div>
+                    </div>
+                  </div>
+                </div>
+          
+                <!-- Submit success message -->
+                <div class="alert alert-success d-none" id="submitSuccessMessage">
+                  <strong>Zpráva byla úspěšně odeslána!</strong>
+                </div>
+          
+                <!-- Submit error message -->
+                <div class="alert alert-danger d-none" id="submitErrorMessage">
+                  <strong>Chyba při odesílání zprávy!</strong>
+                </div>
+          
+                <!-- reCAPTCHA widget -->
+                <div class="g-recaptcha" data-sitekey="6LeW_fAqAAAAAN3aeyy2gFrE-QmZg-28g-5FGkea"></div>
+          
+                <br>
+          
+                <!-- Submit button -->
+                <div class="text-center">
+                  <button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Odeslat</button>
+                </div>
+              </form>
             </div>
-        </div>
+          </div>
+          
     </div>
     <div class="contacts">
         <a href="mailto:info@sedivakelektro.cz">
