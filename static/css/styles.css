@@ -10893,7 +10893,7 @@ p {
 #mainNav { 
   background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%);
   transition: background-color 0.3s ease-in-out;
-  max-height: 64px;
+  max-height: 72px;
 }
 
 #mainNav .navbar-toggler {
