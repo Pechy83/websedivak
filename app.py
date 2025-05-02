@@ -72,11 +72,10 @@ def success_response(message):
 def error_response(message, status_code=400):
     return jsonify({"success": False, "error": message}), status_code
 
-# 📤 Odeslání formuláře
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     try:
-        data = request.get_json(silent=True) or request.form
+        data = request.form  # Používáme FormData z frontendu
         name, email, phone, message = map(str.strip, [
             data.get('name', ''),
             data.get('email', ''),
@@ -93,7 +92,23 @@ def submit_form():
         if not is_valid_phone(phone):
             return error_response("Neplatné telefonní číslo!")
 
-        # 📌 Uložení do databáze
+        # ✅ Ověření reCAPTCHA
+        recaptcha_token = data.get('g-recaptcha-response')
+        if not recaptcha_token:
+            return error_response("Chybí reCAPTCHA token.")
+
+        recaptcha_response = requests.post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            data={
+                'secret': os.getenv("RECAPTCHA_SECRET_KEY"),
+                'response': recaptcha_token
+            }
+        )
+        recaptcha_result = recaptcha_response.json()
+        if not recaptcha_result.get("success"):
+            return error_response("Ověření reCAPTCHA selhalo!")
+
+        # ✅ Uložení do databáze
         try:
             with sqlite3.connect("contacts.db") as conn:
                 conn.execute("INSERT INTO messages (name, email, phone, message) VALUES (?, ?, ?, ?)",
@@ -102,12 +117,15 @@ def submit_form():
         except sqlite3.Error as db_error:
             return error_response(f"Chyba databáze: {db_error}", 500)
 
-        # ✉️ Odeslání e-mailu
+        # ✅ Odeslání e-mailu pomocí mail.connect()
         try:
             msg = Message("Nová zpráva z kontaktního formuláře",
                           recipients=[app.config["MAIL_USERNAME"]])
             msg.body = f"Jméno: {name}\nEmail: {email}\nTelefon: {phone}\n\nZpráva:\n{message}"
-            mail.send(msg)
+
+            with mail.connect() as conn:
+                conn.send(msg)
+
         except Exception as mail_error:
             return error_response(f"Zpráva byla uložena, ale e-mail se nepodařilo odeslat. {mail_error}", 500)
 
@@ -116,13 +134,6 @@ def submit_form():
     except Exception as e:
         return error_response(f"Chyba serveru: {e}", 500)
 
-# ✅ Ověření reCAPTCHA
-@app.route('/submit', methods=['POST'])
-def submit():
-    if xcaptcha.verify():
-        return success_response("reCAPTCHA byla úspěšně ověřena!")
-    print("❌ reCAPTCHA ověření selhalo!")
-    return error_response("Ověření reCAPTCHA selhalo!")
 
 # 🌟 Získání recenzí z Google Places API
 @app.route('/reviews', methods=['GET'])
