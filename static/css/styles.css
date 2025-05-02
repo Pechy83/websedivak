@@ -11430,6 +11430,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   flex: 0 0 100%;          /* Zabrání zmenšování, nastaví šířku na 100 % rodiče */
   box-sizing: border-box;  /* Zahrne padding a border do šířky */
   border: 1px solid #ccc;  /* Viditelný okraj */
+  margin: auto;
   padding: 20px;           /* Vnitřní odsazení */
   scroll-snap-align: start; /* Zarovnání pro scroll snapping (volitelné) */
 }

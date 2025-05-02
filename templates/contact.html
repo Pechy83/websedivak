@@ -49,7 +49,7 @@
         </div>
         <div class="contact-wrapper">
             <div class="contact-form">
-              <form id="contactForm" action="/submit" method="POST" novalidate>
+                <form id="contactForm" action="/submit_form" method="POST" novalidate>
                 <div class="row align-items-stretch mb-5">
                   <div class="col-md-6">
                     <div class="form-group">
@@ -98,8 +98,7 @@
                 </div>
               </form>
             </div>
-          </div>
-          
+          </div>     
     </div>
     <div class="contacts">
         <a href="mailto:info@sedivakelektro.cz">
@@ -115,61 +114,69 @@
 </section>
 
 <script>
-document.getElementById("contactForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
-
-    let name = document.getElementById("name");
-    let email = document.getElementById("email");
-    let phone = document.getElementById("phone");
-    let message = document.getElementById("message");
-    let successMessage = document.getElementById("submitSuccessMessage");
-    let errorMessage = document.getElementById("submitErrorMessage");
-
-    // Reset validace
-    name.classList.remove("is-invalid");
-    email.classList.remove("is-invalid");
-    phone.classList.remove("is-invalid");
-    message.classList.remove("is-invalid");
-    successMessage.classList.add("d-none");
-    errorMessage.classList.add("d-none");
-
-    // Validace
-    let isValid = true;
-    if (!name.value.trim()) { name.classList.add("is-invalid"); isValid = false; }
-    if (!email.value.trim() || !email.value.includes("@")) { email.classList.add("is-invalid"); isValid = false; }
-    if (!phone.value.trim()) { phone.classList.add("is-invalid"); isValid = false; }
-    if (!message.value.trim()) { message.classList.add("is-invalid"); isValid = false; }
+    document.getElementById("contactForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
     
-    if (!isValid) return;
-
-    // Odeslání dat na backend
-    let formData = {
-        name: name.value.trim(),
-        email: email.value.trim(),
-        phone: phone.value.trim(),
-        message: message.value.trim()
-    };
-
-    try {
-        let response = await fetch("http://127.0.0.1:5000/submit_form", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData)
-        });
-
-        let result = await response.json();
-
-        if (result.success) {
-            successMessage.classList.remove("d-none");
-            document.getElementById("contactForm").reset();
-        } else {
+        let name = document.getElementById("name");
+        let email = document.getElementById("email");
+        let phone = document.getElementById("phone");
+        let message = document.getElementById("message");
+        let successMessage = document.getElementById("submitSuccessMessage");
+        let errorMessage = document.getElementById("submitErrorMessage");
+    
+        // Reset validace
+        [name, email, phone, message].forEach(field => field.classList.remove("is-invalid"));
+        successMessage.classList.add("d-none");
+        errorMessage.classList.add("d-none");
+        errorMessage.textContent = "Chyba při odesílání zprávy!";
+    
+        // Validace
+        let isValid = true;
+        if (!name.value.trim()) { name.classList.add("is-invalid"); isValid = false; }
+        if (!email.value.trim() || !email.value.includes("@")) { email.classList.add("is-invalid"); isValid = false; }
+        if (!phone.value.trim()) { phone.classList.add("is-invalid"); isValid = false; }
+        if (!message.value.trim()) { message.classList.add("is-invalid"); isValid = false; }
+    
+        let recaptchaToken = grecaptcha.getResponse();
+        if (!recaptchaToken) {
+            errorMessage.textContent = "Prosím, potvrďte reCAPTCHA.";
+            errorMessage.classList.remove("d-none");
+            return;
+        }
+    
+        if (!isValid) return;
+    
+        // Sestavení FormData
+        let formData = new FormData();
+        formData.append("name", name.value.trim());
+        formData.append("email", email.value.trim());
+        formData.append("phone", phone.value.trim());
+        formData.append("message", message.value.trim());
+        formData.append("g-recaptcha-response", recaptchaToken);
+    
+        try {
+            let response = await fetch("/submit_form", {
+                method: "POST",
+                body: formData
+            });
+    
+            let result = await response.json();
+    
+            if (result.success) {
+                successMessage.classList.remove("d-none");
+                document.getElementById("contactForm").reset();
+                grecaptcha.reset();  // Reset reCAPTCHA
+            } else {
+                errorMessage.textContent = result.error || "Chyba při odesílání zprávy!";
+                errorMessage.classList.remove("d-none");
+            }
+        } catch (error) {
+            errorMessage.textContent = "Došlo k neočekávané chybě.";
             errorMessage.classList.remove("d-none");
         }
-    } catch (error) {
-        errorMessage.classList.remove("d-none");
-    }
-});
-</script> 
+    });
+    </script>
+    
 
    <!-- Footer-->
    <footer class="footer py-4">
