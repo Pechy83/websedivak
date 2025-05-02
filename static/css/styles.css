@@ -11380,9 +11380,11 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 }
 
-#reviews-container {
-  width: 80%;
-  margin: 20px auto;
+.reviews-container {
+  display: flex;
+  overflow-x: auto;             /* Umožní horizontální posun */
+  scroll-snap-type: x mandatory; /* Usnadní zastavení na jedné recenzi */
+  -webkit-overflow-scrolling: touch; /* Hladší scroll na mobilech */
 }
 
 .review {
@@ -11425,9 +11427,12 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 .review {
-  flex-shrink: 0; /* Zabraňuje zmenšení recenzí */
-  width: 300px; /* Pevná šířka recenze */
-  margin-right: 30px; /* Mezera mezi recenzemi */
+  flex: 0 0 100%;          /* Zabrání zmenšování, nastaví šířku na 100 % rodiče */
+  box-sizing: border-box;  /* Zahrne padding a border do šířky */
+  border: 1px solid #ccc;  /* Viditelný okraj */
+  padding: 20px;           /* Vnitřní odsazení */
+  margin: 0;               /* Odstraníme mezery mezi recenzemi */
+  scroll-snap-align: start; /* Zarovnání pro scroll snapping (volitelné) */
 }
 
 .carousel-controls {
