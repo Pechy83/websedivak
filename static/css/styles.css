@@ -3826,6 +3826,7 @@ textarea.form-control-lg {
   flex-basis: 100%;
   flex-grow: 1;
   align-items: center;
+  background-color: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%);
 }
 
 .navbar-toggler {
@@ -11383,16 +11384,22 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .reviews-container {
   display: flex;
-  overflow-x: auto;             /* Umožní horizontální posun */
-  scroll-snap-type: x mandatory; /* Usnadní zastavení na jedné recenzi */
-  -webkit-overflow-scrolling: touch; /* Hladší scroll na mobilech */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
 }
 
 .review {
-  border: 3px solid #ddd;
-  padding: 15px;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  flex: 1 1 calc(33.333% - 40px);
+  max-width: calc(33.333% - 40px);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 20px;
+  scroll-snap-align: start;
+  text-align: center;
 }
 
 .review h3 {
@@ -11427,26 +11434,19 @@ section#contact form#contactForm :-ms-input-placeholder {
   transition: transform 0.3s ease; /* Plynulý přechod při listování */
 }
 
-.review {
-  flex: 0 0 100%;          /* Zabrání zmenšování, nastaví šířku na 100 % rodiče */
-  box-sizing: border-box;  /* Zahrne padding a border do šířky */
-  border: 1px solid #ccc;  /* Viditelný okraj */
-  margin: 0 10px;         /* Vnější odsazení mezi recenzemi */
-  padding: 20px;           /* Vnitřní odsazení */
-  scroll-snap-align: start; /* Zarovnání pro scroll snapping (volitelné) */
-}
-
-/* Na tabletech a výš (šířka nad 768px): dvě recenze vedle sebe */
-@media (min-width: 768px) {
+/* TABLETY */
+@media (max-width: 900px) {
   .review {
-    flex: 0 0 50%;
+      flex: 1 1 calc(50% - 40px);
+      max-width: calc(50% - 40px);
   }
 }
 
-/* Na desktopu (šířka nad 1024px): tři recenze vedle sebe */
-@media (min-width: 1024px) {
-  .review {
-    flex: 0 0 33.33%;
+/* MOBILNÍ TELEFONY */
+@media (max-width: 600px) {
+  .reviews-container {
+      flex-direction: column;
+      align-items: center;
   }
 }
 
