@@ -7613,10 +7613,10 @@ textarea.form-control-lg {
 .mt-2 {
   margin-top: 0.5rem !important;
 }
-/*
+
 .mt-3 {
-  margin-top: 1rem !important;
-} */
+  margin-top: 0 !important;
+}
 
 .mt-4 {
   margin-top: 1.5rem !important;
@@ -10893,7 +10893,7 @@ p {
 #mainNav { 
   background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%);
   transition: background-color 0.3s ease-in-out;
-  max-height: 72px;
+  max-height: 110px;
 }
 
 #mainNav .navbar-toggler {
