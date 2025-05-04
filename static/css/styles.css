@@ -3835,6 +3835,8 @@ textarea.form-control-lg {
   flex-grow: 1;
   align-items: center;
   background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%) !important;
+  padding: 0;
+  margin: 0;
 }
 
 .navbar-toggler {
