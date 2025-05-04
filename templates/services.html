@@ -5,6 +5,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="Šedivák Elektro s.r.o. je specialista na profesionální elektroinstalace a fotovoltaiku. Používáme kvalitní materiály a poctivou instalaci. Nabízíme fotovoltaické systémy, elektroinstalace a údržbu. Kontaktujte nás pro více informací." />
         <meta name="author" content="Šedivák Elektro s.r.o." />
+        <script type="application/ld+json">
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "serviceType": "Elektroinstalace a fotovoltaika",
+            "provider": {
+              "@type": "Organization",
+              "name": "Šedivák Elektro s.r.o.",
+              "url": "https://www.sedivakelektro.cz",
+              "logo": "https://www.sedivakelektro.cz/static/images/logo.avif",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+420 739 056 068",
+                "contactType": "Customer Service",
+                "areaServed": "CZ",
+                "availableLanguage": "Czech"
+              }
+            },
+            "description": "Naše firma nabízí profesionální elektroinstalace, revize, fotovoltaické systémy a údržbu. Zajišťujeme komplexní realizaci fotovoltaických elektráren. Od odborné analýzy a návrhu systému přes projekční činnost, administrativní podporu a vyřízení dotací až po profesionální instalaci a následný servis.",
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "CZK",
+              "price": "Cena na vyžádání",
+              "eligibleRegion": {
+                "@type": "Place",
+                "name": "Czech Republic"
+              }
+            }
+          }
+        </script> 
         <title>Šedivák Elektro s.r.o.</title>
         <!-- Favicon-->
         <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
@@ -57,7 +87,7 @@
         </div>
         <div class="col-lg-6">         
           <p class="text-muted">
-            Fotovoltaické systémy pro bytové domy představují moderní a ekologické řešení, které přináší stabilní a dlouhodobě výhodný způsob získávání energie. Díky naší komplexní realizaci na klíč zajistíme vše od návrhu po montáž, včetně servisu a údržby.
+            Fotovoltaické systémy pro bytové domy představují moderní a ekologické řešení, které přináší stabilní a dlouhodobě výhodný způsob získávání energie. Díky naší komplexní <strong>realizaci na klíč</strong> vše od návrhu po montáž, včetně servisu a údržby.
           </p>
         </div>
       </div>
@@ -99,7 +129,6 @@
 </div>
 <div class="text-center">
   <h5>Mohlo by vás také zajímat?</h5>
-  <a href="{{ url_for('services') }}" style="text-decoration: underline;">FVE pro firmy, bytové a rodinné domy<br></a>
   <a href="{{ url_for('review') }}" style="text-decoration: underline;">Reference</a>
 </div>
 </section>

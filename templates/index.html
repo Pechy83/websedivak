@@ -5,6 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="Šedivák Elektro s.r.o. je specialista na profesionální elektroinstalace a fotovoltaiku. Používáme kvalitní materiály a poctivou instalaci. Nabízíme fotovoltaické systémy, elektroinstalace a údržbu. Kontaktujte nás pro více informací." />
         <meta name="author" content="Šedivák Elektro s.r.o." />
+        <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Electrician",
+              "name": "Šedivák Elektro s.r.o.",
+              "image": "https://www.sedivakelektro.cz/static/images/logo.avif",
+              "@id": "https://www.sedivakelektro.cz",
+              "url": "https://www.sedivakelektro.cz",
+              "telephone": "+420 739 056 068",
+              "email": info@sedivakelektro.cz
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Dýšiná 297",
+                "addressLocality": "Dýšiná",
+                "postalCode": "330 02",
+                "addressCountry": "CZ"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 49.7654102,
+                "longitude": 13.4986051
+              },
+              "openingHours": "Mo-Fr 08:00-17:00",
+              "description": "Šedivák Elektro s.r.o. je specialista na profesionální elektroinstalace a fotovoltaiku. Nabízíme montáže, revize i servis."
+            }
+        </script>    
         <title>Šedivák Elektro s.r.o.</title>
         <!-- Favicon-->
         <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
@@ -56,7 +82,7 @@
             <a href="{{ url_for('rodinnedomy') }}">
               <img class="img-fluid rounded" src="{{ url_for('static', filename='images/dum2.jpg') }}" alt="Instalace pro rodinné domy" />
             </a>
-            <a class="btn btn-button btn-xl mt-3" href="{{ url_for('rodinnedomy') }}">jak může fve fungovat u vás</a>
+            <a class="btn btn-button btn-xl mt-3" href="{{ url_for('rodinnedomy') }}">Jak může FVE fungovat u vás?</a>
           </div>
       
           <div class="col-md-4 mb-4">
@@ -64,7 +90,7 @@
             <a href="{{ url_for('bytovedomy') }}">
               <img class="img-fluid rounded" src="{{ url_for('static', filename='images/bytovy2.jpg') }}" alt="Instalace pro bytové domy" />
             </a>
-            <a class="btn btn-button btn-xl text-uppercase mt-3" href="{{ url_for('bytovedomy') }}">více informací</a>
+            <a class="btn btn-button btn-xl text-uppercase mt-3" href="{{ url_for('bytovedomy') }}">Jak může FVE fungovat u vás?</a>
           </div>
       
           <div class="col-md-4 mb-4">
@@ -72,7 +98,7 @@
             <a href="{{ url_for('firmy') }}">
               <img class="img-fluid rounded" src="{{ url_for('static', filename='images/firma2a.jpg') }}" alt="Instalace pro firmy" />
             </a>
-            <a class="btn btn-button btn-xl text-uppercase mt-3" href="{{ url_for('firmy') }}">více informací</a>
+            <a class="btn btn-button btn-xl text-uppercase mt-3" href="{{ url_for('firmy') }}">Jak může FVE fungovat u vás?</a>
           </div>
         </div>
     </div>
@@ -158,7 +184,8 @@
 
 <div class="text-center">
     <h5 >Mohlo by vas také zajímat?</h5>
-    <a href="{{ url_for('services') }}" style="text-decoration: underline;">FVE pro firmy, bytové a rodinné domy<br></a>
+    <a href="{{ url_for('firmy') }}" style="text-decoration: underline;">Reference pro firmy<br></a>
+    <a href="{{ url_for('bytovedomy') }}" style="text-decoration: underline;">Realizace pro bytové domy<br></a>
     <a href="{{ url_for('review') }}" style="text-decoration: underline;">Reference</a>
 </div>
 

@@ -3808,7 +3808,15 @@ textarea.form-control-lg {
   color: var(--bs-navbar-active-color);
 }
 .navbar-nav .dropdown-menu {
-  position: static;
+  position: absolute; /* Posune menu mimo běžný tok a zarovná k rodiči */
+  top: 0; /* Začne od vrchu */
+  left: 0; /* Zajišťuje, že menu je zarovnané s levým okrajem dropdown */
+  margin: 0; /* Odstraní jakýkoliv margin kolem menu */
+  padding: 0; /* Odstraní padding uvnitř menu */
+  background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%) !important; /* Udržení pozadí */
+}
+.navbar-nav .dropdown {
+  position: relative; /* Umožní použití absolutního pozicování pro dropdown menu */
 }
 
 .navbar-text {
