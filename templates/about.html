@@ -32,6 +32,7 @@
             }
         </script>
         <title>Šedivák Elektro s.r.o.</title>
+        <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
         <!-- Favicon-->
         <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
         <!-- Font Awesome icons (free version)-->
@@ -70,45 +71,89 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Kdo jsme?</h2>
-                    <h3 class="section-subheading text-muted">Společnost Šedivák Elektro byla založena s vizí poskytovat špičková fotovoltaická řešení, která pomáhají snižovat energetickou závislost a zvyšovat efektivitu výroby solární energie. Už více než 10 let se specializujeme na dodávku fotovoltaických systémů pro rodinné domy, bytové domy, firmy i veřejný sektor.
+                    <h3 class="section-subheading text-muted" style="text-align: left;">Společnost Šedivák Elektro byla založena s vizí poskytovat špičková fotovoltaická řešení, která pomáhají snižovat energetickou závislost a zvyšovat efektivitu výroby solární energie. Už více než 10 let se specializujeme na dodávku fotovoltaických systémů pro rodinné domy, bytové domy, firmy i veřejný sektor.
                     </h3>
                 </div>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
+                <div class="row">
+                    <!-- Naše služby -->
+                    <div class="col-12 mb-5" data-aos="fade-up">
+                        <span class="fa-stack fa-4x mb-3">
                             <i class="text-primary fa-circle-bg"></i>
                             <i class="fas fa-handshake fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">Naše služby</h4>
-                        <p class="text-muted" style="text-align: left;"><i class="fas fa-bolt"></i><strong>Zajišťujeme komplexní realizaci fotovoltaických elektráren.</strong></br><i class="fas fa-bolt"></i> Od odborné analýzy a návrhu systému přes projekční činnost, administrativní podporu a vyřízení dotací až po profesionální instalaci a následný servis.</br><i class="fas fa-bolt"></i> Pracujeme s nejmodernějšími technologiemi a dodáváme systémy s vysokou účinností a dlouhou životností.
-                        </p>
+                        <h4 class="my-3 text-start">Naše služby</h4>
+                        <div class="text-muted">
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                <strong>Zajišťujeme komplexní realizaci fotovoltaických elektráren.</strong>
+                            </div>
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Od odborné analýzy a návrhu systému přes projekční činnost, administrativní podporu a vyřízení dotací až po profesionální instalaci a následný servis.
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Pracujeme s nejmodernějšími technologiemi a dodáváme systémy s vysokou účinností a dlouhou životností.
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
+                    <!-- Proč si vybrat nás -->
+                    <div class="col-12 mb-5" data-aos="fade-up" data-aos-delay="100">
+                        <span class="fa-stack fa-4x mb-3">
                             <i class="text-primary fa-circle-bg"></i>
                             <i class="fas fa-question fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">Proč si vybrat nás?</h4>
-                        <p class="text-muted" style="text-align: left;"><i class="fas fa-bolt"></i> Dlouholeté zkušenosti - více než deset let na trhu a stovky úspěšných realizací</br>
-                            <i class="fas fa-bolt"></i> Individuální přístup - každý projekt přizpůsobujeme specifickým potřebám zákazníka</br>
-                            <i class="fas fa-bolt"></i> Kvalitní technologie - spolupracujeme s ověřenými výrobci a dodavateli</br>
-                            <i class="fas fa-bolt"></i> Odborný tým - naši specialisté mají certifikace a zkušenosti s nejnovějšími inovacemi v oboru</br>
-                            <i class="fas fa-bolt"></i> Dotace a administrativa - pomůžeme vám získat státní podporu a zajistit hladký průběh projektu</br>
-                        </p>
+                        <h4 class="my-3 text-start">Proč si vybrat nás?</h4>
+                        <div class="text-muted">
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Dlouholeté zkušenosti - více než deset let na trhu a stovky úspěšných realizací.
+                            </div>
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Individuální přístup - každý projekt přizpůsobujeme specifickým potřebám zákazníka.
+                            </div>
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Kvalitní technologie - spolupracujeme s ověřenými výrobci a dodavateli.
+                            </div>
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Odborný tým - naši specialisté mají certifikace a zkušenosti s nejnovějšími inovacemi v oboru.
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Dotace a administrativa - pomůžeme vám získat státní podporu a zajistit hladký průběh projektu.
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
+                    <!-- Spolehlivý partner -->
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="200">
+                        <span class="fa-stack fa-4x mb-3">
                             <i class="text-primary fa-circle-bg"></i>
                             <i class="fas fa-lightbulb fa-stack-1x fa-inverse"></i>
                         </span>
-                        <h4 class="my-3">Spolehlivý partner</h4>
-                        <p class="text-muted" style="text-align: left;"><i class="fas fa-bolt"></i> Se Šedivák Elektro získáte spolehlivého partnera pro přechod na udržitelnou energetiku.</br><i class="fas fa-bolt"></i> Kontaktujte nás a zjistěte, jak můžete využít solární energii naplno!</br><i class="fas fa-bolt"></i> Působíme v Západočeském a Středočeském kraji a naším cílem je nabídnout každému klientovi optimální řešení pro maximální energetickou soběstačnost a úsporu nákladů.</p>
-                </div>
-            </div>
+                        <h4 class="my-3 text-start">Spolehlivý partner</h4>
+                        <div class="text-muted">
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Se Šedivák Elektro získáte spolehlivého partnera pro přechod na udržitelnou energetiku.
+                            </div>
+                            <div class="d-flex align-items-start mb-2">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Kontaktujte nás a zjistěte, jak můžete využít solární energii naplno!
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <i class="fas fa-bolt me-2 text-primary mt-1"></i>
+                                Působíme v Západočeském a Středočeském kraji a naším cílem je nabídnout každému klientovi optimální řešení pro maximální energetickou soběstačnost a úsporu nákladů.
+                            </div>
+                        </div>
+                    </div>
+                </div>                
             <div class="text-center">
                 <h5>Mohlo by vas také zajímat?</h5>
-                <a href="{{ url_for('services') }}" style="text-decoration: underline;">FVE pro firmy, bytové a rodinné domy<br></a>
-                <a href="{{ url_for('review') }}" style="text-decoration: underline;">Reference</a>
+                <a href="{{ url_for('services') }}" class="custom-link">FVE pro firmy, bytové a rodinné domy<br></a>
+                <a href="{{ url_for('review') }}" class="custom-link">Reference</a>
             </div>
         </section>
 
@@ -144,5 +189,12 @@
         <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 800, // trvání animace v ms
+        once: true     // animace jen jednou při scrollu
+     });
+    </script>
     </body>
 </html>

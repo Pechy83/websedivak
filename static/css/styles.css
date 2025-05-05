@@ -1118,6 +1118,7 @@ progress {
   .col-md-4 {
     flex: 0 0 auto;
     width: 33.33333333%;
+    position: relative;
   }
   .col-md-5 {
     flex: 0 0 auto;
@@ -2881,6 +2882,14 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #6c757d;
   --bs-btn-disabled-border-color: #6c757d;
+}
+
+.btn-overlay {
+  position: absolute;
+  bottom: -20px; /* částečně přes obrázek */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .btn-success {
@@ -11583,4 +11592,9 @@ section#contact form#contactForm :-ms-input-placeholder {
     background-color: transparent !important; 
     border-radius: 50%; 
     margin: 10px auto;
+}
+
+.custom-link {
+  text-decoration: underline;
+  font-size: 1.2rem; 
 }
