@@ -78,7 +78,7 @@
     <div class="container py-4">
         <div class="row text-center">
             <h2 class="section-heading text-uppercase">služby</h2>
-            <h6 class="text-muted">Navrhujeme a instalujeme fotovoltaické řešení na míru pro: </h6>
+            <h6 class="text-muted"><em>Navrhujeme a instalujeme fotovoltaické řešení na míru pro:</em></h6>
             <div class="col-md-4 mb-4 position-relative">
             <h4 class="section-heading text-uppercase">rodinné domy</h4>
             <a href="{{ url_for('rodinnedomy') }}">
@@ -87,7 +87,7 @@
             <a class="btn btn-button btn-xl mt-3" href="{{ url_for('rodinnedomy') }}">Jak může FVE fungovat u vás?</a>
           </div>
       
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4 position-relative">
             <h4 class="section-heading text-uppercase">bytové domy</h4>
             <a href="{{ url_for('bytovedomy') }}">
               <img class="img-fluid rounded" src="{{ url_for('static', filename='images/bytovy2.jpg') }}" alt="Instalace pro bytové domy" />
@@ -95,7 +95,7 @@
             <a class="btn btn-button btn-xl mt-3" href="{{ url_for('bytovedomy') }}">Jak může FVE fungovat u vás?</a>
           </div>
       
-          <div class="col-md-4 mb-4">
+          <div class="col-md-4 mb-4 position-relative">
             <h4 class="section-heading text-uppercase">firmy</h4>
             <a href="{{ url_for('firmy') }}">
               <img class="img-fluid rounded" src="{{ url_for('static', filename='images/firma2a.jpg') }}" alt="Instalace pro firmy" />
@@ -114,9 +114,9 @@
         </div>
         <div id="reviews-carousel"> 
             <div id="reviews" class="reviews-list reviews-container"></div> 
-            <div class="carousel-controls"></div>
-                <button id="prev-review"><i class="fas fa-chevron-left"></i></button>
-                <button id="next-review"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-controls">
+            <button id="prev-review"><i class="fas fa-chevron-left"></i></button>
+            <button id="next-review"><i class="fas fa-chevron-right"></i></button>
             </div> 
         </div>
     </div>
@@ -185,10 +185,10 @@
 </script>
 
 <div class="text-center">
-    <h5 >Mohlo by vas také zajímat?</h5>
-    <a href="{{ url_for('firmy') }}" style="text-decoration: underline;">Reference pro firmy<br></a>
-    <a href="{{ url_for('bytovedomy') }}" style="text-decoration: underline;">Realizace pro bytové domy<br></a>
-    <a href="{{ url_for('review') }}" style="text-decoration: underline;">Reference</a>
+    <h4 >Mohlo by vas také zajímat?</h4>
+    <a href="{{ url_for('firmy') }}" class="custom-link">Reference pro firmy<br></a>
+    <a href="{{ url_for('bytovedomy') }}" class="custom-link">Realizace pro bytové domy<br></a>
+    <a href="{{ url_for('review') }}" class="custom-link">Reference</a>
 </div>
 
         <!-- Footer-->
