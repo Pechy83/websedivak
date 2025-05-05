@@ -3836,7 +3836,7 @@ textarea.form-control-lg {
   align-items: center;
   background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%) !important;
   padding: 0;
-  margin: 0;
+  margin-top: 0;
 }
 
 .navbar-toggler {
@@ -8113,8 +8113,8 @@ textarea.form-control-lg {
 .text-muted {
   --bs-text-opacity: 1;
   color: white !important;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2.5rem;
   font-size: 1.3rem; 
   line-height: 1.5;
 }
