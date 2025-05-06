@@ -10870,8 +10870,8 @@ p {
 }
 
 .page-section h2.section-heading, .page-section .section-heading.h2 {
-  font-size: 2.5rem;
-  padding-top: 5rem;
+  font-size: 2rem;
+  padding-top: 4rem;
   margin-bottom: 1rem;
 }
 .page-section h3.section-subheading, .page-section .section-subheading.h3 {
@@ -11412,7 +11412,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   max-width: 100%;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  padding: 20px;
+  padding: 1rem;
   scroll-snap-align: start;
   text-align: center;
 }
@@ -11450,6 +11450,8 @@ section#contact form#contactForm :-ms-input-placeholder {
   overflow-x: auto; /* pokud chceš i drag/scroll na mobilu */
   scroll-snap-type: x mandatory;
   transition: transform 0.3s ease;
+  overflow: hidden;
+  scroll-behavior: smooth;
 }
 
 @media (min-width: 900px) {
