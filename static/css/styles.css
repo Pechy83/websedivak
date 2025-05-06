@@ -150,6 +150,8 @@ h3, .h3 {
 
 h4, .h4 {
   font-size: calc(1.275rem + 0.3vw);
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }
 @media (min-width: 1200px) {
   h4, .h4 {
@@ -2882,14 +2884,6 @@ textarea.form-control-lg {
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #6c757d;
   --bs-btn-disabled-border-color: #6c757d;
-}
-
-.btn-overlay {
-  position: absolute;
-  bottom: -20px; /* částečně přes obrázek */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2;
 }
 
 .btn-success {
@@ -10914,6 +10908,7 @@ p {
   background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #033C6D 0%, #044278 100%);
   transition: background-color 0.3s ease-in-out;
   min-height: 110px;
+  max-height: 115px;
 }
 
 #mainNav .navbar-toggler {
@@ -11515,6 +11510,13 @@ section#contact form#contactForm :-ms-input-placeholder {
   --bs-btn-hover-border-color: #3f6ee4;
   margin-bottom: 2rem;
   border-radius: 50px;
+  }
+  .btn-overlay {
+    position: absolute;
+    bottom: -20px; /* částečně přes obrázek */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
   }
 
   .custom-gap > [class*="col-"] {
