@@ -11504,16 +11504,20 @@ section#contact form#contactForm :-ms-input-placeholder {
 .btn-button {
   --bs-btn-color: #065599;
   --bs-btn-bg: white;
-  --bs-btn-border-color: 065599;
+  --bs-btn-border-color: #065599;
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #033F73;
   --bs-btn-hover-border-color: #3f6ee4;
   margin-bottom: 2rem;
-  border-radius: 50px;
-  }
+  border-radius: 20px;
+  white-space: nowrap;       /* 🔑 Zabrání zalomení textu */
+  padding: 0.75rem 1.5rem;    /* Větší horizontální prostor */
+  font-size: 1rem;            /* Případně upravit podle potřeby */
+}
+
   .btn-overlay {
     position: absolute;
-    bottom: -20px; /* částečně přes obrázek */
+    bottom: -80px; /* částečně přes obrázek */
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;

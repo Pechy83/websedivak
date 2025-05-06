@@ -77,14 +77,14 @@
 
     <div class="container py-4">
         <div class="row text-center">
-            <h2 class="section-heading text-uppercase">služby</h2>
-            <h3 class="section-subheading text-muted"><em>Navrhujeme a instalujeme fotovoltaické řešení na míru pro:</em></h3>
+            <h1 class="section-heading text-uppercase">služby</h1>
+            <h5 class="section-subheading text-muted" style="text-align: center;"><em>Navrhujeme a instalujeme fotovoltaické řešení na míru pro: </em></h5>
             <div class="col-md-4 mb-4 position-relative">
-            <h4 class="section-heading text-uppercase">rodinné domy</h4>
-            <a href="{{ url_for('rodinnedomy') }}">
-              <img class="img-fluid rounded" src="{{ url_for('static', filename='images/dum2.jpg') }}" alt="Instalace pro rodinné domy" />
-            </a>
-            <a class="btn btn-button btn-xl btn-overlay" href="{{ url_for('rodinnedomy') }}">Jak může FVE fungovat u vás?</a>
+              <h4 class="section-heading text-uppercase">rodinné domy</h4>
+              <a href="{{ url_for('rodinnedomy') }}">
+                <img class="img-fluid rounded" src="{{ url_for('static', filename='images/dum2.jpg') }}" alt="Instalace pro rodinné domy" />
+              </a>
+              <a class="btn btn-button btn-xl btn-overlay" href="{{ url_for('rodinnedomy') }}">Jak může FVE fungovat u vás?</a>
           </div>
       
           <div class="col-md-4 mb-4 position-relative">
@@ -114,10 +114,10 @@
         </div>
         <div id="reviews-carousel"> 
             <div id="reviews" class="reviews-list reviews-container"></div> 
-            <div class="carousel-controls">
+           <!-- <div class="carousel-controls">
             <button id="prev-review"><i class="fas fa-chevron-left"></i></button>
             <button id="next-review"><i class="fas fa-chevron-right"></i></button>
-            </div> 
+            </div> -->
         </div>
     </div>
 </section>
