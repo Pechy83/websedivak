@@ -11517,7 +11517,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
   .btn-overlay {
     position: absolute;
-    bottom: -80px; /* částečně přes obrázek */
+    bottom: -60px; /* částečně přes obrázek */
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
