@@ -114,11 +114,8 @@
         </div>
         <div id="reviews-carousel"> 
             <div id="reviews" class="reviews-list reviews-container"></div> 
-              <div class="carousel-controls">
-              <button id="prev-review"><i class="fas fa-chevron-left"></i></button>
-              <button id="next-review"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
+            <div class="carousel-dots" id="carousel-dots"></div> 
+        </div>        
     </div>
 </section>
 
@@ -162,7 +159,7 @@
             console.error("Chyba při načítání recenzí:", error);
         });
 
-    function initCarousel() {
+    /*function initCarousel() {
         const reviewsList = document.querySelector('.reviews-list');
         const reviews = document.querySelectorAll('.review');
         const reviewWidth = reviews[0].offsetWidth; // Šířka jedné recenze
@@ -180,8 +177,46 @@
                 currentIndex--;
                 reviewsList.style.transform = `translateX(-${currentIndex * reviewWidth}px)`;
             }
-        });
+        }); */
+
+    function initCarousel() {
+    const reviewsList = document.querySelector('.reviews-list');
+    const reviews = document.querySelectorAll('.review');
+    const dotsContainer = document.getElementById('carousel-dots');
+
+    let currentIndex = 0;
+
+    // Nastavení šířky a zobrazení jako "carousel"
+    reviewsList.style.display = 'flex';
+    reviewsList.style.overflow = 'hidden';
+    reviewsList.style.transition = 'transform 0.3s ease';
+    reviews.forEach(review => {
+        review.style.flex = '0 0 100%';
+    });
+
+    // Vytvoření teček
+    dotsContainer.innerHTML = '';
+    reviews.forEach((_, index) => {
+        const dot = document.createElement('button');
+        if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+           });
+            dotsContainer.appendChild(dot);
+    });
+
+    function updateCarousel() {
+        const reviewWidth = reviews[0].offsetWidth;
+        reviewsList.style.transform = `translateX(-${currentIndex * reviewWidth}px)`;
+
+        const dots = dotsContainer.querySelectorAll('button');
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[currentIndex].classList.add('active');
     }
+
+    window.addEventListener('resize', updateCarousel);
+}
 </script>
 
 <div class="text-center">

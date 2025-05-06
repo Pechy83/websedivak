@@ -150,7 +150,7 @@ h3, .h3 {
 
 h4, .h4 {
   font-size: calc(1.275rem + 0.3vw);
-  padding-top: 2rem;
+  padding-top: 4rem;
   padding-bottom: 1rem;
 }
 @media (min-width: 1200px) {
@@ -8117,8 +8117,8 @@ textarea.form-control-lg {
   --bs-text-opacity: 1;
   color: white !important;
   padding-top: 1.5rem;
-  padding-bottom: 2.5rem;
-  font-size: 1.3rem; 
+  padding-bottom: 1rem;
+  font-size: 1.1rem; 
   line-height: 1.5;
 }
 
@@ -10871,7 +10871,7 @@ p {
 
 .page-section h2.section-heading, .page-section .section-heading.h2 {
   font-size: 2.5rem;
-  padding-top: 8rem;
+  padding-top: 5rem;
   margin-bottom: 1rem;
 }
 .page-section h3.section-subheading, .page-section .section-subheading.h3 {
@@ -11431,7 +11431,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 .review .date {
   font-size: 0.9em;
-  color: #888;
+  color: #d9aa00;
   margin-top: 10px;
 }
 
@@ -11483,7 +11483,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 
 .carousel-controls button {
-  background-color: #0F90FF;
+  background-color: transparent;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
@@ -11603,4 +11603,24 @@ section#contact form#contactForm :-ms-input-placeholder {
 .custom-link {
   text-decoration: underline;
   font-size: 1.2rem; 
+}
+
+.carousel-dots {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.carousel-dots button {
+  background-color: #ccc;
+  border: none;
+  border-radius: 50%;
+  width: 12px;
+  height: 12px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-dots button.active {
+  background-color: #065599;
 }
