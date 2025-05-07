@@ -11397,7 +11397,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 }
 
-.reviews-container {
+/* .reviews-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -11405,18 +11405,47 @@ section#contact form#contactForm :-ms-input-placeholder {
   margin: 0 auto;
   max-width: 1200px;
   padding: 20px;
+} */
+
+/* Hlavní kontejner karuselu */
+#reviews-carousel {
+  overflow: hidden; /* Skryje recenze, které jsou mimo viditelnou oblast */
+  position: relative; /* Pro pozicování ovládacích prvků (pokud byste je přidával) */
+  /* Přidáme styly pro odsazení a maximální šířku z původního .reviews-container */
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
 }
 
+/* Seznam recenzí - flex kontejner pro položky karuselu */
+.reviews-list {
+  display: flex;
+  flex-wrap: nowrap; /* důležité: žádné zalamování - vše na jedné řádce */
+  overflow-x: auto;  /* pokud chcete, aby uživatel mohl sám posouvat/táhnout */
+  /* overflow: hidden; */ /* Tuto řádku odstraníme, je redundantní a potenciálně konfliktní s overflow-x: auto */
+  scroll-snap-type: x mandatory; /* Zajistí, že se při posouvání zastaví na začátku každé recenze */
+  scroll-behavior: smooth; /* Plynulé posouvání při navigaci (např. JS tlačítky) */
+  gap: 20px; /* Přidá mezeru mezi jednotlivými recenzemi */
+  /* Pokud chcete posouvat pomocí myši/prstu, přidejte */
+  /* cursor: grab; */
+  /* user-select: none; */
+}
+
+/* Jednotlivá recenze v karuselu */
 .review {
-  flex: 0 0 100%; /* jen 1 recenze na "stránku" */
+  /* Základní šířka na mobilu - 100% šířky kontejneru karuselu */
+  flex: 0 0 100%;
   max-width: 100%;
   box-sizing: border-box;
   border: 1px solid #ccc;
   padding: 1rem;
-  scroll-snap-align: start;
+  scroll-snap-align: start; /* Důležité pro scroll-snap-type */
   text-align: center;
+  /* Přidáno pro zajištění, že recenze neklesají pod sebe při flex */
+  min-width: 0; /* Důležité pro flex položky v nowrap kontejneru */
 }
 
+/* Styly pro jednotlivé části recenze - tyto zůstanou stejné */
 .review h3 {
   color: white;
   margin-top: 0;
@@ -11439,43 +11468,37 @@ section#contact form#contactForm :-ms-input-placeholder {
   margin-right: 30px; /* Přidá x pixelů odsazení mezi ikonou a jménem */
 }
 
-#reviews-carousel {
-  overflow: hidden; /* Skryje recenze, které jsou mimo viditelnou oblast */
-  position: relative; /* Pro pozicování ovládacích prvků */
-}
-
-.reviews-list {
-  display: flex;
-  flex-wrap: nowrap; /* důležité: žádné zalamování */
-  overflow-x: auto; /* pokud chceš i drag/scroll na mobilu */
-  scroll-snap-type: x mandatory;
-  transition: transform 0.3s ease;
-  overflow: hidden;
-  scroll-behavior: smooth;
-}
-
+/* Media Queries pro šířku recenzí v karuselu */
 @media (min-width: 900px) {
   .review {
-    flex: 0 0 33.3333%;
-    max-width: 33.3333%;
+    /* Na větších obrazovkách recenze zabírají 1/3 šířky (včetně mezery) */
+    flex: 0 0 calc(33.3333% - 20px * 2 / 3); /* 20px je mezera, 2/3 protože 3 sloupce */
+    max-width: calc(33.3333% - 20px * 2 / 3);
+    /* Alternativně a jednodušeji můžete nechat 33.3333% a nechat flex/gap ať si s mezerou poradí */
+    /* flex: 0 0 33.3333%; */
+    /* max-width: 33.3333%; */
   }
 }
 
 @media (min-width: 600px) and (max-width: 899px) {
   .review {
-    flex: 0 0 50%;
-    max-width: 50%;
+     /* Na středních obrazovkách recenze zabírají 1/2 šířky (včetně mezery) */
+     flex: 0 0 calc(50% - 20px / 2); /* 20px je mezera, 1/2 protože 2 sloupce */
+     max-width: calc(50% - 20px / 2);
+     /* Alternativně a jednodušeji */
+     /* flex: 0 0 50%; */
+     /* max-width: 50%; */
   }
 }
 
 @media (max-width: 599px) {
   .review {
-    flex: 0 0 100%;
+    /* Na malých obrazovkách recenze zabírají 100% šířky (včetně mezery) */
+    flex: 0 0 100%; /* Zde calc není potřeba, 100% je ok s gap */
     max-width: 100%;
   }
 }
-
-.carousel-controls {
+/* .carousel-controls {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -11490,7 +11513,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 10px;
-}
+} */
 
 .picture {
   height: auto;
