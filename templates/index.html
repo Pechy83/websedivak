@@ -179,41 +179,72 @@
             }
         }); */
 
-    function initCarousel() {
+        function initCarousel() {
     const reviewsList = document.querySelector('.reviews-list');
     const reviews = document.querySelectorAll('.review');
     const dotsContainer = document.getElementById('carousel-dots');
     let currentIndex = 0;
 
-    // Nastavení přepínačů (teček)
+    // --- 2a) Setup teček (dots) ---
     dotsContainer.innerHTML = '';
-    reviews.forEach((_, index) => {
-        const dot = document.createElement('button');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-            currentIndex = index;
-            updateCarousel();
-        });
-        dotsContainer.appendChild(dot);
+    reviews.forEach((_, idx) => {
+      const dot = document.createElement('button');
+      if (idx === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        currentIndex = idx;
+        updateCarousel();
+      });
+      dotsContainer.appendChild(dot);
     });
 
+    // --- 2b) Funkce pro aktualizaci posunu i teček ---
     function updateCarousel() {
-        const reviewWidth = reviewsList.offsetWidth; // Správná šířka viditelného okna
-        reviewsList.style.transform = `translateX(-${currentIndex * reviewWidth}px)`;
-
-        // Aktualizace teček
-        const dots = dotsContainer.querySelectorAll('button');
-        dots.forEach(dot => dot.classList.remove('active'));
-        if (dots[currentIndex]) {
-            dots[currentIndex].classList.add('active');
-        }
+      const visibleWidth = reviewsList.offsetWidth;
+      reviewsList.style.transform = `translateX(-${currentIndex * visibleWidth}px)`;
+      // aktivní tečka
+      dotsContainer.querySelectorAll('button').forEach((d, i) =>
+        d.classList.toggle('active', i === currentIndex)
+      );
     }
+
+    window.addEventListener('resize', updateCarousel);
+    updateCarousel();
+
+    // --- 2c) Swipe pomocí touch eventů ---
+    let startX = 0;
+    let deltaX = 0;
+    const threshold = 50; // minimální posun v px, aby se změnila recenze
+
+    reviewsList.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+      deltaX = 0;
+      // Zrušíme CSS transition během přetažení, pro plynulost
+      reviewsList.style.transition = 'none';
+    });
+
+    reviewsList.addEventListener('touchmove', e => {
+      deltaX = e.touches[0].clientX - startX;
+      // vizuální posun recenzí během přetažení
+      const width = reviewsList.offsetWidth;
+      const moveX = -currentIndex * width + deltaX;
+      reviewsList.style.transform = `translateX(${moveX}px)`;
+    });
+
+    reviewsList.addEventListener('touchend', () => {
+      // obnovíme přechod
+      reviewsList.style.transition = '';
+      if (deltaX > threshold && currentIndex > 0) {
+        currentIndex--; // swipe doprava -> předchozí
+      } else if (deltaX < -threshold && currentIndex < reviews.length - 1) {
+        currentIndex++; // swipe doleva -> další
+      }
 
     // Při změně velikosti přepočítej šířku a aktualizuj pozici
     window.addEventListener('resize', updateCarousel);
 
     updateCarousel(); // inicializace
-}
+}); 
+    }
 </script>
 
 <div class="text-center">

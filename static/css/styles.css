@@ -11634,6 +11634,12 @@ section#contact form#contactForm :-ms-input-placeholder {
   margin-top: 1rem;
 }
 
+@media (max-width: 768px) {
+  .carousel-dots {
+    display: none;
+  }
+}
+
 .carousel-dots button {
   background-color: #ccc;
   border: none;
