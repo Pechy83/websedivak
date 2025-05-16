@@ -2234,7 +2234,6 @@ textarea.form-control-lg {
   margin-top: 0.25em;
   vertical-align: top;
   background-color: #fff;
-  background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
   border: 1px solid rgba(0, 0, 0, 0.25);
@@ -11498,14 +11497,6 @@ section#contact form#contactForm :-ms-input-placeholder {
     background-color: transparent !important;
   }
 
-  .google-logo {
-    width: 80px; 
-    height: auto;
-    background-color: transparent !important; 
-    border-radius: 50%; 
-    margin: 10px auto;
-}
-
 .custom-link {
   text-decoration: underline;
   font-size: 1.2rem; 
@@ -11523,6 +11514,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* === SEZNAM RECENZÍ === */
 .reviews-list {
   display: flex;
+  overflow: hidden;
   gap: 20px;
   transition: transform 0.3s ease;
   will-change: transform;
@@ -11536,7 +11528,8 @@ section#contact form#contactForm :-ms-input-placeholder {
   padding: 1rem;
   text-align: center;
   scroll-snap-align: start;
-  background-color: #fff;
+  background: radial-gradient(143.03% 126.45% at 91.05% 92.01%, #0F90FF 0%, #023A6A 100%);
+  min-width: 0;
 }
 
 .review h3 {

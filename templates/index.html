@@ -127,15 +127,19 @@ fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")
     if (data.error) {
       document.getElementById('reviews').innerHTML = `<p>Chyba: ${data.error}</p>`;
     } else {
-      const reviewsList = document.querySelector(".reviews-list");
+      const reviewsContainer = document.getElementById("reviews");
+      reviewsContainer.innerHTML = "";
+
       data.forEach(review => {
         const reviewElement = document.createElement("div");
         reviewElement.classList.add("review");
 
         const generateStars = (rating) => {
-          return Array.from({ length: 5 }, (_, i) =>
-            `<i class="${i < rating ? 'fas fa-star' : 'far fa-star'}"></i>`
-          ).join('');
+          let stars = '';
+          for (let i = 0; i < 5; i++) {
+            stars += `<i class="${i < rating ? 'fas fa-star' : 'far fa-star'}"></i>`;
+          }
+          return stars;
         };
 
         reviewElement.innerHTML = `
@@ -145,7 +149,7 @@ fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")
           <p>${review.text}</p>
         `;
 
-        reviewsList.appendChild(reviewElement);
+        reviewsContainer.appendChild(reviewElement);
       });
 
       initCarousel();
@@ -158,8 +162,10 @@ fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")
 
 function initCarousel() {
   const reviewsList = document.querySelector('.reviews-list');
+  const reviewItems = document.querySelectorAll('.review');
   const prevBtn = document.getElementById('prev-review');
   const nextBtn = document.getElementById('next-review');
+
   let currentIndex = 0;
 
   function getVisibleCount() {
@@ -169,63 +175,76 @@ function initCarousel() {
   }
 
   function updateCarousel() {
+    const visibleCount = getVisibleCount();
     const reviewItem = document.querySelector('.review');
-    const itemWidth = reviewItem.offsetWidth + 20; // +gap
-    const offset = currentIndex * itemWidth;
+    if (!reviewItem) return;
+
+    const reviewWidth = reviewItem.offsetWidth + 20; // 20px gap
+    const offset = currentIndex * reviewWidth;
+
     reviewsList.style.transform = `translateX(-${offset}px)`;
   }
 
-  function clampIndex() {
-    const totalItems = document.querySelectorAll('.review').length;
-    const maxIndex = Math.ceil(totalItems / getVisibleCount()) - 1;
-    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
-  }
-
   prevBtn.addEventListener('click', () => {
-    currentIndex--;
-    clampIndex();
-    updateCarousel();
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateCarousel();
+    }
   });
 
   nextBtn.addEventListener('click', () => {
-    currentIndex++;
-    clampIndex();
-    updateCarousel();
+    const visibleCount = getVisibleCount();
+    const maxIndex = Math.max(0, Math.ceil(reviewItems.length / visibleCount) - 1);
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+      updateCarousel();
+    }
   });
 
-  // Swipe pro mobily
+  // Swipe pro mobilní zařízení
   let startX = 0;
   let deltaX = 0;
+  const threshold = 50;
 
   reviewsList.addEventListener('touchstart', e => {
     startX = e.touches[0].clientX;
+    deltaX = 0;
     reviewsList.style.transition = 'none';
   });
 
   reviewsList.addEventListener('touchmove', e => {
     deltaX = e.touches[0].clientX - startX;
-    const itemWidth = document.querySelector('.review').offsetWidth + 20;
-    reviewsList.style.transform = `translateX(${-currentIndex * itemWidth + deltaX}px)`;
+    const reviewItem = document.querySelector('.review');
+    if (!reviewItem) return;
+
+    const reviewWidth = reviewItem.offsetWidth + 20;
+    const offset = -currentIndex * reviewWidth + deltaX;
+    reviewsList.style.transform = `translateX(${offset}px)`;
   });
 
   reviewsList.addEventListener('touchend', () => {
-    const threshold = 50;
-    if (deltaX > threshold) currentIndex--;
-    if (deltaX < -threshold) currentIndex++;
-    clampIndex();
-    reviewsList.style.transition = 'transform 0.3s ease';
+    reviewsList.style.transition = 'transform 0.4s ease';
+
+    const visibleCount = getVisibleCount();
+    const maxIndex = Math.max(0, Math.ceil(reviewItems.length / visibleCount) - 1);
+
+    if (deltaX > threshold && currentIndex > 0) {
+      currentIndex--;
+    } else if (deltaX < -threshold && currentIndex < maxIndex) {
+      currentIndex++;
+    }
+
     updateCarousel();
   });
 
   window.addEventListener('resize', () => {
-    clampIndex();
     updateCarousel();
   });
 
-  clampIndex();
   updateCarousel();
 }
 </script>
+
 
 
 <div class="text-center">
