@@ -11514,10 +11514,10 @@ section#contact form#contactForm :-ms-input-placeholder {
 /* === SEZNAM RECENZÍ === */
 .reviews-list {
   display: flex;
-  overflow: hidden;
+  transition: transform 0.4s ease;
   gap: 20px;
-  transition: transform 0.3s ease;
-  will-change: transform;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
 }
 
 /* === JEDNOTLIVÁ RECENZE === */
@@ -11585,7 +11585,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  color: #065599;
+  color: #d9aa00;
   background: transparent;
   border: none;
   cursor: pointer;
