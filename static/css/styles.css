@@ -641,7 +641,6 @@ progress {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   width: 100%;
-  padding-left: 0;
   margin-right: auto;
   margin-left: auto;
 }
@@ -10938,6 +10937,7 @@ p {
   font-size: 1.1rem;
   color: white;
   letter-spacing: 0.0625em;
+  padding-left: 1rem;
 }
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
   color: white;
