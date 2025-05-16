@@ -113,9 +113,10 @@
             <!-- <img class="rounded-circle img-fluid google-logo" src="{{ url_for('static', filename='images/logo-google1.jpg') }}" alt="logo_goole" />-->
         </div>
         <div id="reviews-carousel"> 
+            <button id="prev-review" class="arrow left">&#8249;</button>
             <div id="reviews" class="reviews-list reviews-container"></div> 
-            <!--  <div class="carousel-dots" id="carousel-dots"></div> -->
-        </div>        
+            <button id="next-review" class="arrow right">&#8250;</button>
+        </div>
     </div>
 </section>
 
@@ -159,92 +160,63 @@
             console.error("Chyba při načítání recenzí:", error);
         });
 
-    /*function initCarousel() {
-        const reviewsList = document.querySelector('.reviews-list');
-        const reviews = document.querySelectorAll('.review');
-        const reviewWidth = reviews[0].offsetWidth; // Šířka jedné recenze
-        let currentIndex = 0;
-
-        document.getElementById('next-review').addEventListener('click', () => {
-            if (currentIndex < reviews.length - 1) {
-                currentIndex++;
-                reviewsList.style.transform = `translateX(-${currentIndex * reviewWidth}px)`;
-            }
-        });
-
-        document.getElementById('prev-review').addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                reviewsList.style.transform = `translateX(-${currentIndex * reviewWidth}px)`;
-            }
-        }); */
-
-        function initCarousel() {
+function initCarousel() {
     const reviewsList = document.querySelector('.reviews-list');
     const reviews = document.querySelectorAll('.review');
-    const dotsContainer = document.getElementById('carousel-dots');
+    const prevButton = document.getElementById('prev-review');
+    const nextButton = document.getElementById('next-review');
     let currentIndex = 0;
 
-    // --- 2a) Setup teček (dots) ---
-    dotsContainer.innerHTML = '';
-    reviews.forEach((_, idx) => {
-      const dot = document.createElement('button');
-      if (idx === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        currentIndex = idx;
-        updateCarousel();
-      });
-      dotsContainer.appendChild(dot);
-    });
-
-    // --- 2b) Funkce pro aktualizaci posunu i teček ---
     function updateCarousel() {
-      const visibleWidth = reviewsList.offsetWidth;
-      reviewsList.style.transform = `translateX(-${currentIndex * visibleWidth}px)`;
-      // aktivní tečka
-      dotsContainer.querySelectorAll('button').forEach((d, i) =>
-        d.classList.toggle('active', i === currentIndex)
-      );
+        const width = reviewsList.offsetWidth;
+        reviewsList.style.transform = `translateX(-${currentIndex * width}px)`;
     }
 
-    window.addEventListener('resize', updateCarousel);
-    updateCarousel();
+    nextButton.addEventListener('click', () => {
+        if (currentIndex < reviews.length - 1) {
+            currentIndex++;
+            updateCarousel();
+        }
+    });
 
-    // --- 2c) Swipe pomocí touch eventů ---
+    prevButton.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+        }
+    });
+
+    // Swipe pro mobily
     let startX = 0;
     let deltaX = 0;
-    const threshold = 50; // minimální posun v px, aby se změnila recenze
+    const threshold = 50;
 
     reviewsList.addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-      deltaX = 0;
-      // Zrušíme CSS transition během přetažení, pro plynulost
-      reviewsList.style.transition = 'none';
+        startX = e.touches[0].clientX;
+        deltaX = 0;
+        reviewsList.style.transition = 'none';
     });
 
     reviewsList.addEventListener('touchmove', e => {
-      deltaX = e.touches[0].clientX - startX;
-      // vizuální posun recenzí během přetažení
-      const width = reviewsList.offsetWidth;
-      const moveX = -currentIndex * width + deltaX;
-      reviewsList.style.transform = `translateX(${moveX}px)`;
+        deltaX = e.touches[0].clientX - startX;
+        const width = reviewsList.offsetWidth;
+        const moveX = -currentIndex * width + deltaX;
+        reviewsList.style.transform = `translateX(${moveX}px)`;
     });
 
     reviewsList.addEventListener('touchend', () => {
-      // obnovíme přechod
-      reviewsList.style.transition = '';
-      if (deltaX > threshold && currentIndex > 0) {
-        currentIndex--; // swipe doprava -> předchozí
-      } else if (deltaX < -threshold && currentIndex < reviews.length - 1) {
-        currentIndex++; // swipe doleva -> další
-      }
+        reviewsList.style.transition = '';
+        if (deltaX > threshold && currentIndex > 0) {
+            currentIndex--;
+        } else if (deltaX < -threshold && currentIndex < reviews.length - 1) {
+            currentIndex++;
+        }
+        updateCarousel();
+    });
 
-    // Při změně velikosti přepočítej šířku a aktualizuj pozici
     window.addEventListener('resize', updateCarousel);
-
-    updateCarousel(); // inicializace
-}); 
-    }
+    updateCarousel();
+}
 </script>
 
 <div class="text-center">

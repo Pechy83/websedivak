@@ -11416,18 +11416,28 @@ section#contact form#contactForm :-ms-input-placeholder {
   padding: 20px;
 }
 
-/* Seznam recenzí - flex kontejner pro položky karuselu */
 .reviews-list {
   display: flex;
-  flex-wrap: nowrap; /* důležité: žádné zalamování - vše na jedné řádce */
-  overflow-x: auto;  /* pokud chcete, aby uživatel mohl sám posouvat/táhnout */
-  /* overflow: hidden; */ /* Tuto řádku odstraníme, je redundantní a potenciálně konfliktní s overflow-x: auto */
-  scroll-snap-type: x mandatory; /* Zajistí, že se při posouvání zastaví na začátku každé recenze */
-  scroll-behavior: smooth; /* Plynulé posouvání při navigaci (např. JS tlačítky) */
-  gap: 20px; /* Přidá mezeru mezi jednotlivými recenzemi */
-  /* Pokud chcete posouvat pomocí myši/prstu, přidejte */
-  /* cursor: grab; */
-  /* user-select: none; */
+  flex-wrap: nowrap;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .reviews-list {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+  }
+
+  .review {
+    scroll-snap-align: start;
+    min-width: 100%;
+    flex-shrink: 0;
+  }
 }
 
 /* Jednotlivá recenze v karuselu */
@@ -11629,28 +11639,44 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 1.2rem; 
 }
 
-.carousel-dots {
-  text-align: center;
-  margin-top: 1rem;
+/* Recenze posuvník */
+.reviews-list {
+  display: flex;
+  transition: transform 0.3s ease;
+  overflow: hidden;
 }
 
+/* Jednotlivá recenze */
+.review {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+}
+
+/* Šipky */
+.arrow {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #065599;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.arrow.left {
+  left: 10px;
+}
+
+.arrow.right {
+  right: 10px;
+}
+
+/* Skrytí šipek na mobilních zařízeních */
 @media (max-width: 768px) {
-  .carousel-dots {
+  .arrow {
     display: none;
   }
-}
-
-.carousel-dots button {
-  background-color: #ccc;
-  border: none;
-  border-radius: 50%;
-  width: 12px;
-  height: 12px;
-  margin: 0 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.carousel-dots button.active {
-  background-color: #065599;
 }
