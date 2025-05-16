@@ -105,119 +105,128 @@
         </div>
     </div>
           
- <!-- Recenze-->
+<!-- Recenze -->
 <section class="page-section" id="reviews-container">
-    <div class="container"> 
-        <div class="text-center">
-            <h3 class="section-heading text-uppercase">Recenze</h3>
-            <!-- <img class="rounded-circle img-fluid google-logo" src="{{ url_for('static', filename='images/logo-google1.jpg') }}" alt="logo_goole" />-->
-        </div>
-        <div id="reviews-carousel"> 
-            <button id="prev-review" class="arrow left">&#8249;</button>
-            <div id="reviews" class="reviews-list reviews-container"></div> 
-            <button id="next-review" class="arrow right">&#8250;</button>
-        </div>
+  <div class="container"> 
+    <div class="text-center">
+      <h3 class="section-heading text-uppercase">Recenze</h3>
     </div>
+
+    <div id="reviews-carousel">
+      <button class="arrow left" id="prev-review">&#10094;</button>
+      <div class="reviews-list" id="reviews"></div>
+      <button class="arrow right" id="next-review">&#10095;</button>
+    </div>
+  </div>
 </section>
 
 <script>
-     fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                document.getElementById('reviews').innerHTML = `<p>Chyba: ${data.error}</p>`;
-            } else {
-                let reviewsContainer = document.getElementById("reviews");
-                reviewsContainer.innerHTML = "";
-    
-                data.forEach(review => {
-                    let reviewElement = document.createElement("div");
-                    reviewElement.classList.add("review");
-    
-                    // Funkce pro generování hvězdiček na základě hodnocení
-                    const generateStars = (rating) => {
-                        let stars = '';
-                        for (let i = 0; i < 5; i++) {
-                            stars += `<i class="${i < rating ? 'fas fa-star' : 'far fa-star'}"></i>`;
-                        }
-                        return stars;
-                    };
-    
-                    reviewElement.innerHTML = `
-                        <h3><i class="fas fa-user"></i> ${review.author}</h3>
-                        <div class="stars">${generateStars(review.rating)}</div>
-                        <p class="date">Datum: ${new Date(review.date).toLocaleDateString()}</p>
-                        <p>${review.text}</p> 
-                    `;
-    
-                    reviewsContainer.appendChild(reviewElement);
-                });
-                initCarousel(); // Inicializujeme listování po načtení recenzí
-            }
-        })
-        .catch(error => {
-            document.getElementById('reviews').innerHTML = `<p>Chyba při načítání recenzí.</p>`;
-            console.error("Chyba při načítání recenzí:", error);
-        });
+fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")
+  .then(response => response.json())
+  .then(data => {
+    if (data.error) {
+      document.getElementById('reviews').innerHTML = `<p>Chyba: ${data.error}</p>`;
+    } else {
+      const reviewsList = document.querySelector(".reviews-list");
+      data.forEach(review => {
+        const reviewElement = document.createElement("div");
+        reviewElement.classList.add("review");
+
+        const generateStars = (rating) => {
+          return Array.from({ length: 5 }, (_, i) =>
+            `<i class="${i < rating ? 'fas fa-star' : 'far fa-star'}"></i>`
+          ).join('');
+        };
+
+        reviewElement.innerHTML = `
+          <h3><i class="fas fa-user"></i> ${review.author}</h3>
+          <div class="stars">${generateStars(review.rating)}</div>
+          <p class="date">Datum: ${new Date(review.date).toLocaleDateString()}</p>
+          <p>${review.text}</p>
+        `;
+
+        reviewsList.appendChild(reviewElement);
+      });
+
+      initCarousel();
+    }
+  })
+  .catch(error => {
+    document.getElementById('reviews').innerHTML = `<p>Chyba při načítání recenzí.</p>`;
+    console.error("Chyba:", error);
+  });
 
 function initCarousel() {
-    const reviewsList = document.querySelector('.reviews-list');
-    const reviews = document.querySelectorAll('.review');
-    const prevButton = document.getElementById('prev-review');
-    const nextButton = document.getElementById('next-review');
-    let currentIndex = 0;
+  const reviewsList = document.querySelector('.reviews-list');
+  const prevBtn = document.getElementById('prev-review');
+  const nextBtn = document.getElementById('next-review');
+  let currentIndex = 0;
 
-    function updateCarousel() {
-        const width = reviewsList.offsetWidth;
-        reviewsList.style.transform = `translateX(-${currentIndex * width}px)`;
-    }
+  function getVisibleCount() {
+    if (window.innerWidth >= 900) return 3;
+    if (window.innerWidth >= 600) return 2;
+    return 1;
+  }
 
-    nextButton.addEventListener('click', () => {
-        if (currentIndex < reviews.length - 1) {
-            currentIndex++;
-            updateCarousel();
-        }
-    });
+  function updateCarousel() {
+    const reviewItem = document.querySelector('.review');
+    const itemWidth = reviewItem.offsetWidth + 20; // +gap
+    const offset = currentIndex * itemWidth;
+    reviewsList.style.transform = `translateX(-${offset}px)`;
+  }
 
-    prevButton.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-        }
-    });
+  function clampIndex() {
+    const totalItems = document.querySelectorAll('.review').length;
+    const maxIndex = Math.ceil(totalItems / getVisibleCount()) - 1;
+    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+  }
 
-    // Swipe pro mobily
-    let startX = 0;
-    let deltaX = 0;
-    const threshold = 50;
-
-    reviewsList.addEventListener('touchstart', e => {
-        startX = e.touches[0].clientX;
-        deltaX = 0;
-        reviewsList.style.transition = 'none';
-    });
-
-    reviewsList.addEventListener('touchmove', e => {
-        deltaX = e.touches[0].clientX - startX;
-        const width = reviewsList.offsetWidth;
-        const moveX = -currentIndex * width + deltaX;
-        reviewsList.style.transform = `translateX(${moveX}px)`;
-    });
-
-    reviewsList.addEventListener('touchend', () => {
-        reviewsList.style.transition = '';
-        if (deltaX > threshold && currentIndex > 0) {
-            currentIndex--;
-        } else if (deltaX < -threshold && currentIndex < reviews.length - 1) {
-            currentIndex++;
-        }
-        updateCarousel();
-    });
-
-    window.addEventListener('resize', updateCarousel);
+  prevBtn.addEventListener('click', () => {
+    currentIndex--;
+    clampIndex();
     updateCarousel();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex++;
+    clampIndex();
+    updateCarousel();
+  });
+
+  // Swipe pro mobily
+  let startX = 0;
+  let deltaX = 0;
+
+  reviewsList.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    reviewsList.style.transition = 'none';
+  });
+
+  reviewsList.addEventListener('touchmove', e => {
+    deltaX = e.touches[0].clientX - startX;
+    const itemWidth = document.querySelector('.review').offsetWidth + 20;
+    reviewsList.style.transform = `translateX(${-currentIndex * itemWidth + deltaX}px)`;
+  });
+
+  reviewsList.addEventListener('touchend', () => {
+    const threshold = 50;
+    if (deltaX > threshold) currentIndex--;
+    if (deltaX < -threshold) currentIndex++;
+    clampIndex();
+    reviewsList.style.transition = 'transform 0.3s ease';
+    updateCarousel();
+  });
+
+  window.addEventListener('resize', () => {
+    clampIndex();
+    updateCarousel();
+  });
+
+  clampIndex();
+  updateCarousel();
 }
 </script>
+
 
 <div class="text-center">
     <h4 >Mohlo by vas také zajímat?</h4>

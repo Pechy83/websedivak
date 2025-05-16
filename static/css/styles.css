@@ -11396,134 +11396,6 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 }
 
-/* .reviews-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 20px;
-} */
-
-/* Hlavní kontejner karuselu */
-#reviews-carousel {
-  overflow: hidden; /* Skryje recenze, které jsou mimo viditelnou oblast */
-  position: relative; /* Pro pozicování ovládacích prvků (pokud byste je přidával) */
-  /* Přidáme styly pro odsazení a maximální šířku z původního .reviews-container */
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 20px;
-}
-
-.reviews-list {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  gap: 0;
-}
-
-@media (max-width: 768px) {
-  .reviews-list {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    gap: 20px;
-  }
-
-  .review {
-    scroll-snap-align: start;
-    min-width: 100%;
-    flex-shrink: 0;
-  }
-}
-
-/* Jednotlivá recenze v karuselu */
-.review {
-  /* Základní šířka na mobilu - 100% šířky kontejneru karuselu */
-  flex: 0 0 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  padding: 1rem;
-  scroll-snap-align: start; /* Důležité pro scroll-snap-type */
-  text-align: center;
-  /* Přidáno pro zajištění, že recenze neklesají pod sebe při flex */
-  min-width: 0; /* Důležité pro flex položky v nowrap kontejneru */
-}
-
-/* Styly pro jednotlivé části recenze - tyto zůstanou stejné */
-.review h3 {
-  color: white;
-  margin-top: 0;
-  margin-bottom: 5px;
-  font-size: 1.3em;
-}
-
-.review .stars {
-  color: orange;
-  margin-bottom: 10px;
-}
-
-.review .date {
-  font-size: 0.9em;
-  color: #d9aa00;
-  margin-top: 10px;
-}
-
-.review h3 i {
-  margin-right: 30px; /* Přidá x pixelů odsazení mezi ikonou a jménem */
-}
-
-/* Media Queries pro šířku recenzí v karuselu */
-@media (min-width: 900px) {
-  .review {
-    /* Na větších obrazovkách recenze zabírají 1/3 šířky (včetně mezery) */
-    flex: 0 0 calc(33.3333% - 20px * 2 / 3); /* 20px je mezera, 2/3 protože 3 sloupce */
-    max-width: calc(33.3333% - 20px * 2 / 3);
-    /* Alternativně a jednodušeji můžete nechat 33.3333% a nechat flex/gap ať si s mezerou poradí */
-    /* flex: 0 0 33.3333%; */
-    /* max-width: 33.3333%; */
-  }
-}
-
-@media (min-width: 600px) and (max-width: 899px) {
-  .review {
-     /* Na středních obrazovkách recenze zabírají 1/2 šířky (včetně mezery) */
-     flex: 0 0 calc(50% - 20px / 2); /* 20px je mezera, 1/2 protože 2 sloupce */
-     max-width: calc(50% - 20px / 2);
-     /* Alternativně a jednodušeji */
-     /* flex: 0 0 50%; */
-     /* max-width: 50%; */
-  }
-}
-
-@media (max-width: 599px) {
-  .review {
-    /* Na malých obrazovkách recenze zabírají 100% šířky (včetně mezery) */
-    flex: 0 0 100%; /* Zde calc není potřeba, 100% je ok s gap */
-    max-width: 100%;
-  }
-}
-/* .carousel-controls {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-.carousel-controls button {
-  background-color: transparent;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 10px;
-} */
-
 .picture {
   height: auto;
   max-width: 60%;
@@ -11639,30 +11511,91 @@ section#contact form#contactForm :-ms-input-placeholder {
   font-size: 1.2rem; 
 }
 
-/* Recenze posuvník */
+/* === HLAVNÍ KONTEJNER KARUSELU === */
+#reviews-carousel {
+  position: relative;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* === SEZNAM RECENZÍ === */
 .reviews-list {
   display: flex;
+  gap: 20px;
   transition: transform 0.3s ease;
-  overflow: hidden;
+  will-change: transform;
 }
 
-/* Jednotlivá recenze */
+/* === JEDNOTLIVÁ RECENZE === */
 .review {
-  min-width: 100%;
+  flex: 0 0 100%;
   box-sizing: border-box;
+  border: 1px solid #ccc;
   padding: 1rem;
+  text-align: center;
+  scroll-snap-align: start;
+  background-color: #fff;
 }
 
-/* Šipky */
+.review h3 {
+  color: white;
+  margin: 0 0 5px;
+  font-size: 1.3em;
+}
+
+.review .stars {
+  color: orange;
+  margin-bottom: 10px;
+}
+
+.review .date {
+  font-size: 0.9em;
+  color: #d9aa00;
+  margin-top: 10px;
+}
+
+.review h3 i {
+  margin-right: 10px;
+}
+
+/* === RESPONSIVE BREAKPOINTY === */
+@media (min-width: 900px) {
+  .review {
+    flex: 0 0 calc(33.333% - 13.33px); /* 3 sloupce */
+  }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+  .review {
+    flex: 0 0 calc(50% - 10px); /* 2 sloupce */
+  }
+}
+
+@media (max-width: 599px) {
+  .reviews-list {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .review {
+    flex: 0 0 100%; /* 1 sloupec */
+  }
+}
+
+/* === ŠIPKY (POUZE NA VELKÉ OBRAZOVKY) === */
 .arrow {
-  background-color: transparent;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: #065599;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  font-size: 2rem;
+  color: #065599;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   z-index: 10;
 }
 
@@ -11674,7 +11607,6 @@ section#contact form#contactForm :-ms-input-placeholder {
   right: 10px;
 }
 
-/* Skrytí šipek na mobilních zařízeních */
 @media (max-width: 768px) {
   .arrow {
     display: none;
