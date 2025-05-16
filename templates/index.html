@@ -148,6 +148,9 @@ function initCarousel() {
   const prev = document.getElementById('prev-review');
   const next = document.getElementById('next-review');
 
+  // Pro mobily použij nativní swipe a vynech JS
+  if (window.innerWidth <= 599) return;
+
   let current = 0;
 
   function visibleCount() {
@@ -176,34 +179,10 @@ function initCarousel() {
     }
   });
 
-  // Touch swipe
-  let startX = 0;
-  let diff = 0;
-
-  reviewsList.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-    reviewsList.style.transition = 'none';
-  });
-
-  reviewsList.addEventListener('touchmove', e => {
-    diff = e.touches[0].clientX - startX;
-    const width = reviewsList.clientWidth / visibleCount();
-    reviewsList.style.transform = `translateX(${-current * width + diff}px)`;
-  });
-
-  reviewsList.addEventListener('touchend', () => {
-    reviewsList.style.transition = 'transform 0.4s ease';
-    if (diff > 50 && current > 0) current--;
-    else if (diff < -50 && current < Math.ceil(reviews.length / visibleCount()) - 1) current++;
-    update();
-  });
-
   window.addEventListener('resize', update);
   update();
 }
 </script>
-
-
 
 <div class="text-center">
     <h4 >Mohlo by vas také zajímat?</h4>
@@ -211,7 +190,6 @@ function initCarousel() {
     <a href="{{ url_for('bytovedomy') }}" class="custom-link">Realizace pro bytové domy<br></a>
     <!-- <a href="{{ url_for('review') }}" class="custom-link">Reference</a> -->
 </div>
-
         <!-- Footer-->
         <footer class="footer py-4">
             <div class="container">

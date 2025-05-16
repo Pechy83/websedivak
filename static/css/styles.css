@@ -150,7 +150,7 @@ h3, .h3 {
 
 h4, .h4 {
   font-size: calc(1.275rem + 0.3vw);
-  padding-top: 4rem;
+  padding-top: 3rem;
   padding-bottom: 1rem;
 }
 @media (min-width: 1200px) {
@@ -11568,14 +11568,17 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 @media (max-width: 599px) {
   .reviews-list {
+    display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    gap: 20px;
   }
 
   .review {
     flex: 0 0 100%; /* 1 sloupec */
+    scroll-snap-align: start;
   }
 }
 
@@ -11604,4 +11607,8 @@ section#contact form#contactForm :-ms-input-placeholder {
   .arrow {
     display: none;
   }
+}
+
+body {
+  overflow-x: hidden;
 }
