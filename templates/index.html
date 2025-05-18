@@ -142,7 +142,7 @@ fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")
     initCarousel();
   });
 
-function initCarousel() {
+function initCarousel() { 
   const reviewsList = document.querySelector('.reviews-list');
   const reviews = document.querySelectorAll('.review');
   const prev = document.getElementById('prev-review');
@@ -152,6 +152,9 @@ function initCarousel() {
   if (window.innerWidth <= 599) return;
 
   let current = 0;
+  let reviewWidth = 0;
+  let countVisible = 1;
+  let maxIndex = 0;
 
   function visibleCount() {
     if (window.innerWidth >= 900) return 3;
@@ -160,8 +163,11 @@ function initCarousel() {
   }
 
   function update() {
-    const width = reviewsList.clientWidth / visibleCount();
-    reviewsList.style.transform = `translateX(-${current * width}px)`;
+    countVisible = visibleCount();
+    reviewWidth = reviewsList.clientWidth / countVisible;
+    maxIndex = reviews.length - countVisible;
+    if (current > maxIndex) current = maxIndex;
+    reviewsList.style.transform = `translateX(-${current * reviewWidth}px)`;
   }
 
   prev.addEventListener('click', () => {
@@ -172,8 +178,7 @@ function initCarousel() {
   });
 
   next.addEventListener('click', () => {
-    const max = Math.ceil(reviews.length / visibleCount()) - 1;
-    if (current < max) {
+    if (current < maxIndex) {
       current++;
       update();
     }
