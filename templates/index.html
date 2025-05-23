@@ -31,19 +31,68 @@
               "description": "Šedivák Elektro s.r.o. je specialista na profesionální elektroinstalace a fotovoltaiku. Nabízíme montáže, revize i servis."
             }
         </script>    
-        <title>Šedivák Elektro s.r.o.</title>
-        <!-- Favicon-->
-        <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" async defer crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    </head>
+      <title>Šedivák Elektro s.r.o.</title>
+      <!-- Favicon -->
+      <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon" />
 
+      <!-- Font Awesome (na ikony, asynchronně) -->
+      <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" async defer crossorigin="anonymous"></script>
+
+      <!-- Preconnect pro Google Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+      <!-- Preload a deferred Google Fonts: Montserrat + Roboto Slab -->
+      <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+      />
+      <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+          media="print"
+          onload="this.media='all'"
+      />
+
+      <link
+          rel="preload"
+          as="style"
+          href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&display=swap"
+      />
+      <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&display=swap"
+          media="print"
+          onload="this.media='all'"
+      />
+      <noscript>
+          <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap"
+          >
+          <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700&display=swap"
+          >
+      </noscript>
+      <!-- Core theme CSS (Bootstrap + vaše styly) -->
+      <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-pzjw8f+ua7Kw1TIq0vIqDkLAKj3QTkFsG1zBAZgr5Uiw7MBe/PLjJ2V1wyFvH7nS"
+          crossorigin="anonymous"
+      />
+      <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/styles.css') }}"
+        media="print"
+        onload="this.media='all'"
+      >
+      <noscript>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+      </noscript>
+    </head>
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -67,7 +116,6 @@
         </nav>
       <!-- Masthead -->
 <header class="masthead">
-  <!-- Obrázek v elementu <img>, který bude absolutně pozicovaný jako pozadí -->
   <img
     src="{{ url_for('static', filename='images/uvodni.jpg') }}"
     alt="solární panely"
@@ -81,12 +129,11 @@
             <a class="btn btn-primary btn-xl text-uppercase" href="{{ url_for('contact') }}">Kontaktovat</a>
         </div>
       </header>
-  
-
+      <!-- Služby -->
     <div class="container py-4">
         <div class="row text-center">
             <h1 class="section-heading text-uppercase">služby</h1>
-            <h5 class="section-subheading text-muted" style="text-align: center;"><em>Navrhujeme a instalujeme fotovoltaické řešení na míru pro: </em></h5>
+            <h3 class="section-subheading text-muted" style="text-align: center;"><em>Navrhujeme a instalujeme fotovoltaické řešení na míru pro: </em></h3>
             <div class="col-md-4 mb-4 position-relative">
               <h4 class="section-heading text-uppercase">rodinné domy</h4>
               <a href="{{ url_for('rodinnedomy') }}">
