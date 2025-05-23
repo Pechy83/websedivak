@@ -67,12 +67,20 @@
         </nav>
       <!-- Masthead-->
       <header class="masthead">
+        <picture>
+          <img src="{{ url_for('static', filename='images/uvodni.jpg') }}"
+             alt="solární panely"
+             class="img-cover"
+             width="1920" height="900"
+             loading="eager"
+             fetchpriority="high">
+        </picture>
         <div class="container">
             <div class="masthead-heading text-uppercase">Šedivák elektro S.R.O</div>
             <div class="masthead-subheading">energie budoucnosti - od návrhu po realizaci</div>
             <a class="btn btn-primary btn-xl text-uppercase" href="{{ url_for('contact') }}">Kontaktovat</a>
         </div>
-    </header>
+      </header>
   
 
     <div class="container py-4">
@@ -104,21 +112,19 @@
           </div>
         </div>
     </div>
-          
-<!-- Recenze -->
-<section class="page-section" id="reviews-section">
-  <div class="container"> 
-    <div class="text-center">
-      <h3 class="section-heading text-uppercase">Recenze</h3>
-    </div>
-
-    <div id="reviews-carousel">
-      <button class="arrow left" id="prev-review">&#10094;</button>
-      <div class="reviews-list" id="reviews"></div>
-      <button class="arrow right" id="next-review">&#10095;</button>
-    </div>
-  </div>
-</section>
+          <!-- Recenze -->
+          <section class="page-section" id="reviews-section">
+            <div class="container">
+              <div class="text-center">
+                <h3 class="section-heading text-uppercase">Recenze</h3>
+              </div>
+              <div id="reviews-carousel">
+                <button class="arrow left" id="prev-review">&#10094;</button>
+                <div class="reviews-list" id="reviews"></div>
+                <button class="arrow right" id="next-review">&#10095;</button>
+              </div>
+            </div>
+          </section>
 
 <script>
 fetch("https://websedivak-c4c7a7634080.herokuapp.com/reviews")

@@ -8,14 +8,18 @@ import pytz
 from dotenv import load_dotenv
 from flask import Flask, jsonify, render_template, request
 from flask_cors import CORS
-from flask_mail import Mail, Message
 from flask_xcaptcha import XCaptcha
+from flask_compress import Compress
+from flask_mailman import Mail, EmailMessage
 
 # ✅ Načtení proměnných z .env souboru
 load_dotenv()
 
 # ✅ Inicializace Flask aplikace
 app = Flask(__name__, static_folder='static')
+
+# ✅ Komprese a CORS
+Compress(app)
 CORS(app)
 
 # ✅ Konfigurace reCAPTCHA
@@ -75,7 +79,7 @@ def error_response(message, status_code=400):
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
     try:
-        data = request.form  # Používáme FormData z frontendu
+        data = request.form
         name, email, phone, message = map(str.strip, [
             data.get('name', ''),
             data.get('email', ''),
@@ -88,52 +92,54 @@ def submit_form():
 
         if not is_valid_email(email):
             return error_response("Neplatná e-mailová adresa!")
-
         if not is_valid_phone(phone):
             return error_response("Neplatné telefonní číslo!")
 
-        # ✅ Ověření reCAPTCHA
+        # reCAPTCHA
         recaptcha_token = data.get('g-recaptcha-response')
         if not recaptcha_token:
             return error_response("Chybí reCAPTCHA token.")
-
-        recaptcha_response = requests.post(
+        recaptcha_result = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',
             data={
                 'secret': os.getenv("RECAPTCHA_SECRET_KEY"),
                 'response': recaptcha_token
             }
-        )
-        recaptcha_result = recaptcha_response.json()
+        ).json()
         if not recaptcha_result.get("success"):
             return error_response("Ověření reCAPTCHA selhalo!")
 
-        # ✅ Uložení do databáze
+        # Uložení do DB
+        with sqlite3.connect("contacts.db") as conn:
+            conn.execute(
+                "INSERT INTO messages (name, email, phone, message) VALUES (?, ?, ?, ?)",
+                (name, email, phone, message)
+            )
+
+        # Odeslání e-mailu přes Flask-Mailman
         try:
-            with sqlite3.connect("contacts.db") as conn:
-                conn.execute("INSERT INTO messages (name, email, phone, message) VALUES (?, ?, ?, ?)",
-                             (name, email, phone, message))
-                conn.commit()
-        except sqlite3.Error as db_error:
-            return error_response(f"Chyba databáze: {db_error}", 500)
-
-        # ✅ Odeslání e-mailu pomocí mail.connect()
-        try:
-            msg = Message("Nová zpráva z kontaktního formuláře",
-                          recipients=[app.config["MAIL_USERNAME"]])
-            msg.body = f"Jméno: {name}\nEmail: {email}\nTelefon: {phone}\n\nZpráva:\n{message}"
-
-            with mail.connect() as conn:
-                conn.send(msg)
-
+            email_msg = EmailMessage(
+                subject="Nová zpráva z kontaktního formuláře",
+                body=(
+                    f"Jméno: {name}\n"
+                    f"E-mail: {email}\n"
+                    f"Telefon: {phone}\n\n"
+                    f"Zpráva:\n{message}"
+                ),
+                to=[app.config["MAIL_USERNAME"]],
+                from_email=app.config["MAIL_DEFAULT_SENDER"]
+            )
+            mail.send(email_msg)
         except Exception as mail_error:
-            return error_response(f"Zpráva byla uložena, ale e-mail se nepodařilo odeslat. {mail_error}", 500)
+            return error_response(
+                f"Zpráva byla uložena, ale e-mail se nepodařilo odeslat: {mail_error}",
+                500
+            )
 
         return success_response("Zpráva byla úspěšně odeslána a e-mail doručen!")
 
     except Exception as e:
         return error_response(f"Chyba serveru: {e}", 500)
-
 
 # 🌟 Získání recenzí z Google Places API
 @app.route('/reviews', methods=['GET'])
