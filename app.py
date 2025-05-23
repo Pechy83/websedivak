@@ -129,7 +129,7 @@ def submit_form():
                 to=[app.config["MAIL_USERNAME"]],
                 from_email=app.config["MAIL_DEFAULT_SENDER"]
             )
-            mail.send(email_msg)
+            email_msg.send()
         except Exception as mail_error:
             return error_response(
                 f"Zpráva byla uložena, ale e-mail se nepodařilo odeslat: {mail_error}",
