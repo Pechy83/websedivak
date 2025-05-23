@@ -65,16 +65,16 @@
                 </div>
             </div>
         </nav>
-      <!-- Masthead-->
-      <header class="masthead">
-        <picture>
-          <img src="{{ url_for('static', filename='images/uvodni.jpg') }}"
-             alt="solární panely"
-             class="header.masthead"
-             width="1920" height="900"
-             loading="eager"
-             fetchpriority="high">
-        </picture>
+      <!-- Masthead -->
+<header class="masthead">
+  <!-- Obrázek v elementu <img>, který bude absolutně pozicovaný jako pozadí -->
+  <img
+    src="{{ url_for('static', filename='images/uvodni.jpg') }}"
+    alt="solární panely"
+    class="masthead-bg"
+    loading="eager"
+    fetchpriority="high"
+  >
         <div class="container">
             <div class="masthead-heading text-uppercase">Šedivák elektro S.R.O</div>
             <div class="masthead-subheading">energie budoucnosti - od návrhu po realizaci</div>
