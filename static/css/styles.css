@@ -10968,11 +10968,12 @@ p {
     background-color: rgba(211, 211, 211, 0.8);
   }
   #mainNav.navbar-shrink .navbar-brand {
-    font-size: 1.25em;
+    font-size: 1.5em;
   }
   #mainNav.navbar-shrink .navbar-brand svg,
   #mainNav.navbar-shrink .navbar-brand img {
-    height: 5rem;
+    height: auto;
+    max-height: 9rem;
   }
   #mainNav .navbar-nav .nav-item {
     margin-right: 1rem;
