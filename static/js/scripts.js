@@ -46,6 +46,48 @@ window.addEventListener('DOMContentLoaded', event => {
 
 });
 
+// JavaScript pro zoom obrázků a odeslání kontaktního formuláře
+document.addEventListener("DOMContentLoaded", function () {
+    // Zoom obrázky
+    document.querySelectorAll('.zoom-img').forEach(function(img) {
+        img.addEventListener('click', function() {
+            this.classList.toggle('zoom-active');
+        });
+    });
+
+    // Odeslání kontaktního formuláře pomocí FormData
+    const form = document.querySelector("form");
+    if (form) {
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    form.reset();
+                } else {
+                    alert(result.error || "Odeslání selhalo.");
+                }
+            } catch (error) {
+                console.error("Chyba při odesílání:", error);
+                alert("Odeslání se nezdařilo.");
+            }
+        });
+    }
+});
+
+
+
+/* oprava formuláře -await
 let response = await fetch("https://websedivak-c4c7a7634080.herokuapp.com/submit_form", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -59,4 +101,4 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
-  
+  */
