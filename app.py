@@ -118,18 +118,20 @@ def submit_form():
 
         # Odeslání e-mailu přes Flask-Mailman
         try:
-            email_msg = EmailMessage(
-                subject="Nová zpráva z kontaktního formuláře",
-                body=(
-                    f"Jméno: {name}\n"
-                    f"E-mail: {email}\n"
-                    f"Telefon: {phone}\n\n"
-                    f"Zpráva:\n{message}"
-                ),
-                to=[app.config["MAIL_USERNAME"]],
-                from_email=app.config["MAIL_DEFAULT_SENDER"]
-            )
-            email_msg.send()
+        # použij e-mail z formuláře jako odesílatele, nebo default pokud je prázdný
+           sender_addr = email or app.config["MAIL_DEFAULT_SENDER"]
+           email_msg = EmailMessage(
+               subject = "Nová zpráva z kontaktního formuláře",
+               body = (
+                   f"Jméno: {name}\n"
+                   f"E-mail: {email}\n"
+                   f"Telefon: {phone}\n\n"
+                   f"Zpráva:\n{message}"
+               ),
+               to = [app.config["MAIL_USERNAME"]],
+               from_email = sender_addr
+           )
+           email_msg.send()
         except Exception as mail_error:
             return error_response(
                 f"Zpráva byla uložena, ale e-mail se nepodařilo odeslat: {mail_error}",
