@@ -79,8 +79,7 @@
         </div>
       </nav>
       <header class="masthead">
-        <picture>
-          <!-- WebP verze -->
+       <!-- <picture>
           <source
             srcset="{{ url_for('static', filename='images/uvodni1-small.webp') }} 480w,
               {{ url_for('static', filename='images/uvodni1-medium.webp') }} 768w,
@@ -88,7 +87,7 @@
             sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 1200px"
             type="image/webp"
           >
-          <!-- JPEG fallback -->
+          
           <img
             src="{{ url_for('static', filename='images/uvodni1.jpg') }}"
             srcset="{{ url_for('static', filename='images/uvodni1-small.jpg') }} 480w,
@@ -102,16 +101,16 @@
             width="800"
             height="1067"
           >
-        </picture>
+        </picture>  -->
 
-        <!---<img
+        <img
           src="{{ url_for('static', filename='images/uvodni1.jpg') }}"
           alt="solární panely"
           class="masthead-bg"
           loading="eager"
           fetchpriority="high"
           width="800" height="1067"
-        > ---->
+        > 
         <div class="container">
           <div class="masthead-heading text-uppercase">Šedivák elektro S.R.O</div>
           <div class="masthead-subheading">energie budoucnosti - od návrhu po realizaci</div>
