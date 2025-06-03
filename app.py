@@ -4,6 +4,7 @@ import sqlite3
 import datetime
 import requests
 import pytz
+import mimetypes
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify, render_template, request
@@ -21,6 +22,8 @@ app = Flask(__name__, static_folder='static')
 # ✅ Komprese a CORS
 Compress(app)
 CORS(app)
+
+mimetypes.add_type("image/webp", ".webp")
 
 # ✅ Konfigurace reCAPTCHA
 app.config.update(
