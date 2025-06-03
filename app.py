@@ -36,7 +36,7 @@ PLACE_ID = os.getenv("PLACE_ID")
 # ✅ Konfigurace Flask-Mail (Gmail SMTP)
 app.config.update({
     "MAIL_SERVER": os.getenv("MAIL_SERVER"),
-    "MAIL_PORT": int(os.getenv("MAIL_PORT", 587)),  # Výchozí port 587, pokud není v .env
+    "MAIL_PORT": int(os.getenv("MAIL_PORT", 587)),
     "MAIL_USE_TLS": os.getenv("MAIL_USE_TLS", "True") == "True",
     "MAIL_USERNAME": os.getenv("MAIL_USERNAME"),
     "MAIL_PASSWORD": os.getenv("MAIL_PASSWORD"),
@@ -95,10 +95,11 @@ def submit_form():
         if not is_valid_phone(phone):
             return error_response("Neplatné telefonní číslo!")
 
-        # reCAPTCHA
+        # ✅ Ověření reCAPTCHA
         recaptcha_token = data.get('g-recaptcha-response')
         if not recaptcha_token:
             return error_response("Chybí reCAPTCHA token.")
+
         recaptcha_result = requests.post(
             'https://www.google.com/recaptcha/api/siteverify',
             data={
@@ -106,32 +107,32 @@ def submit_form():
                 'response': recaptcha_token
             }
         ).json()
+
         if not recaptcha_result.get("success"):
             return error_response("Ověření reCAPTCHA selhalo!")
 
-        # Uložení do DB
+        # ✅ Uložení do DB
         with sqlite3.connect("contacts.db") as conn:
             conn.execute(
                 "INSERT INTO messages (name, email, phone, message) VALUES (?, ?, ?, ?)",
                 (name, email, phone, message)
             )
 
-        # Odeslání e-mailu přes Flask-Mailman
+        # ✅ Odeslání e-mailu přes Flask-Mailman
         try:
-        # použij e-mail z formuláře jako odesílatele, nebo default pokud je prázdný
-           sender_addr = email or app.config["MAIL_DEFAULT_SENDER"]
-           email_msg = EmailMessage(
-               subject = "Nová zpráva z kontaktního formuláře",
-               body = (
-                   f"Jméno: {name}\n"
-                   f"E-mail: {email}\n"
-                   f"Telefon: {phone}\n\n"
-                   f"Zpráva:\n{message}"
-               ),
-               to = [app.config["MAIL_USERNAME"]],
-               from_email = sender_addr
-           )
-           email_msg.send()
+            sender_addr = email or app.config["MAIL_DEFAULT_SENDER"]
+            email_msg = EmailMessage(
+                subject="Nová zpráva z kontaktního formuláře",
+                body=(
+                    f"Jméno: {name}\n"
+                    f"E-mail: {email}\n"
+                    f"Telefon: {phone}\n\n"
+                    f"Zpráva:\n{message}"
+                ),
+                to=[app.config["MAIL_USERNAME"]],
+                from_email=sender_addr
+            )
+            email_msg.send()
         except Exception as mail_error:
             return error_response(
                 f"Zpráva byla uložena, ale e-mail se nepodařilo odeslat: {mail_error}",
@@ -171,6 +172,7 @@ def get_reviews():
 
     except requests.exceptions.RequestException as e:
         return error_response(f"Chyba sítě: {e}", 500)
+
 
 # ✅ Hlavní stránka
 @app.route('/')
