@@ -82,25 +82,25 @@
         <picture>
           <!-- WebP verze -->
           <source
-        srcset="{{ url_for('static', filename='images/uvodni1-small.webp') }} 480w,
-            {{ url_for('static', filename='images/uvodni1-medium.webp') }} 768w,
-            {{ url_for('static', filename='images/uvodni1-large.webp') }} 1200w"
-        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 1200px"
-        type="image/webp"
+            srcset="{{ url_for('static', filename='images/uvodni1-small.webp') }} 480w,
+              {{ url_for('static', filename='images/uvodni1-medium.webp') }} 768w,
+              {{ url_for('static', filename='images/uvodni1-large.webp') }} 1200w"
+            sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 1200px"
+            type="image/webp"
           >
           <!-- JPEG fallback -->
           <img
-        src="{{ url_for('static', filename='images/uvodni1.jpg') }}"
-        srcset="{{ url_for('static', filename='images/uvodni1-small.jpg') }} 480w,
-            {{ url_for('static', filename='images/uvodni1-medium.jpg') }} 768w,
-            {{ url_for('static', filename='images/uvodni1-large.jpg') }} 1200w"
-        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 1200px"
-        alt="solární panely"
-        class="masthead-bg"
-        loading="eager"
-        fetchpriority="high"
-        width="800"
-        height="1067"
+            src="{{ url_for('static', filename='images/uvodni1.jpg') }}"
+            srcset="{{ url_for('static', filename='images/uvodni1-small.jpg') }} 480w,
+              {{ url_for('static', filename='images/uvodni1-medium.jpg') }} 768w,
+              {{ url_for('static', filename='images/uvodni1-large.jpg') }} 1200w"
+            sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 1200px"
+            alt="solární panely"
+            class="masthead-bg"
+            loading="eager"
+            fetchpriority="high"
+            width="800"
+            height="1067"
           >
         </picture>
 
