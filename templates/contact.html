@@ -141,8 +141,6 @@
     <!-- Contact Form Script -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script> 
 <script>
-    document.getElementById("contactForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
     
         let name = document.getElementById("name");
         let email = document.getElementById("email");
@@ -180,8 +178,55 @@
         formData.append("phone", phone.value.trim());
         formData.append("message", message.value.trim());
         formData.append("g-recaptcha-response", recaptchaToken);
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    // Před odesláním skryj obě hlášky:
+    successMessage.classList.add("d-none");
+    errorMessage.classList.add("d-none");
+
+    const formData = new FormData(form);
+
+    try {
+      let response = await fetch("/submit_form", {
+        method: "POST",
+        body: formData
+      });
+
+      // Pokusíme se parsovat JSON
+      let result;
+      try {
+        result = await response.json();
+      } catch {
+        errorMessage.textContent = "Neplatná odezva od serveru.";
+        errorMessage.classList.remove("d-none");
+        return;
+      }
+
+      // Pokud backend vrací { success: true } či { success: false, error: "..." }
+      if (result.success) {
+        successMessage.classList.remove("d-none");
+        form.reset();
+        if (window.grecaptcha) {
+          grecaptcha.reset();
+        }
+      } else {
+        // result.error može být string nebo undefined → v takovém případě zobrazíme obecnou hlášku
+        errorMessage.textContent = result.error || "Chyba při odeslání zprávy!";
+        errorMessage.classList.remove("d-none");
+      }
+
+    } catch (err) {
+      // Fetch nevyšel (např. síťová chyba)
+      errorMessage.textContent = "Došlo k neočekávané chybě.";
+      errorMessage.classList.remove("d-none");
+      console.error(err);
+    }
+  });
+  </script>
     
-        try {
+       <!--try {
             let response = await fetch("/submit_form", {
                 method: "POST",
                 body: formData
@@ -201,8 +246,8 @@
             errorMessage.textContent = "Došlo k neočekávané chybě.";
             errorMessage.classList.remove("d-none");
         }
-    });
-    </script>
+      */ --> 
+    
     
    <!-- Footer-->
    <footer class="footer py-4">
