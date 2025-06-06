@@ -142,7 +142,7 @@ def submit_form():
                 500
             )
 
-        return success_response("Zpráva byla úspěšně odeslána a e-mail doručen!")
+        return success_response({})
 
     except Exception as e:
         return error_response(f"Chyba serveru: {e}", 500)
