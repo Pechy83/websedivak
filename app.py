@@ -123,7 +123,7 @@ def submit_form():
 
         # ✅ Odeslání e-mailu přes Flask-Mailman
         try:
-            sender_addr = app.config["MAIL_DEFAULT_SENDER"]
+            sender_addr = email or app.config["MAIL_DEFAULT_SENDER"]
             email_msg = EmailMessage(
                 subject="Nová zpráva z kontaktního formuláře",
                 body=(
