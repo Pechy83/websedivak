@@ -5,7 +5,7 @@
 */
 
 
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOMContentLoaded', () => {
 
     // Navbar shrink function
     const navbarShrink = function () {
@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
             this.classList.toggle('zoom-active');
         });
     });
-
-    // Odeslání kontaktního formuláře pomocí FormData
+});
+    /* Odeslání kontaktního formuláře pomocí FormData
     const form = document.querySelector("form");
     if (form) {
         form.addEventListener("submit", async function (e) {
@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Odeslání se nezdařilo.");
             }
         });
-    }
-});
+    } */
+
 
 
 
