@@ -74,10 +74,10 @@ def is_valid_phone(phone):
 
 # ✅ Pomocné funkce pro odpovědi
 def success_response(message):
-    return jsonify({"success": "success", "message": message}), 200
+    return jsonify({"success": "True", "message": message}), 200
 
 def error_response(message, status_code=400):
-    return jsonify({"success": "error", "error": message}), status_code
+    return jsonify({"success": "False", "error": message}), status_code
 
 @app.route('/submit_form', methods=['POST'])
 def submit_form():
