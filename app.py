@@ -187,8 +187,8 @@ def enforce_https_and_www():
         url = request.url.replace('http://', 'https://', 1)
         return redirect(url, code=301)
 
-    # Přesměrování z bez www na www (pouze pro hlavní doménu)
-    if host == 'sedivakelektro.cz':
+    # Přesměrování z sedivakelektro.cz na www.sedivakelektro.cz
+    if host.startswith('sedivakelektro.cz') and not host.startswith('www.'):
         new_url = request.url.replace('://sedivakelektro.cz', '://www.sedivakelektro.cz', 1)
         return redirect(new_url, code=301)
 
@@ -227,4 +227,4 @@ def firmy():
 
 # ✅ Spuštění aplikace
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=True)
