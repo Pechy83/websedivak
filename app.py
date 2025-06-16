@@ -7,7 +7,7 @@ import pytz
 import mimetypes
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, redirect
 from flask_cors import CORS
 from flask_xcaptcha import XCaptcha
 from flask_compress import Compress
@@ -176,6 +176,21 @@ def get_reviews():
     except requests.exceptions.RequestException as e:
         return error_response(f"Chyba sítě: {e}", 500)
 
+# Přesměrování
+@app.before_request
+def enforce_https_and_www():
+    forwarded_proto = request.headers.get('X-Forwarded-Proto', 'http')
+    host = request.host
+
+    # Přesměrování z HTTP na HTTPS
+    if forwarded_proto != 'https':
+        url = request.url.replace('http://', 'https://', 1)
+        return redirect(url, code=301)
+
+    # Přesměrování z bez www na www (pouze pro hlavní doménu)
+    if host == 'sedivakelektro.cz':
+        new_url = request.url.replace('://sedivakelektro.cz', '://www.sedivakelektro.cz', 1)
+        return redirect(new_url, code=301)
 
 # ✅ Hlavní stránka
 @app.route('/')
