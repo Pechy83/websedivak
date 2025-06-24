@@ -3,8 +3,10 @@ import re
 import sqlite3
 import datetime
 import requests
+import traceback
 import pytz
 import mimetypes
+
 
 from dotenv import load_dotenv
 from flask import Flask, jsonify, render_template, request, redirect
@@ -136,16 +138,22 @@ def submit_form():
                 from_email=sender_addr
             )
             email_msg.send()
+
         except Exception as mail_error:
+            error_details = traceback.format_exc()
+            print("Chyba při odesílání e-mailu:\n", error_details)
+
             return error_response(
-                f"Zpráva byla uložena, ale e-mail se nepodařilo odeslat: {mail_error}",
+                "Zpráva byla uložena, ale e-mail se nepodařilo odeslat. Podrobnosti byly vypsány na server.",
                 500
             )
 
-        return success_response({})
+        return success_response({})  # ✅ pokud vše proběhne dobře
 
     except Exception as e:
-        return error_response(f"Chyba serveru: {e}", 500)
+            error_details = traceback.format_exc()
+            print("Chyba serveru:\n", error_details)
+            return error_response(f"Chyba serveru: {str(e)}", 500)
 
 # 🌟 Získání recenzí z Google Places API
 @app.route('/reviews', methods=['GET'])
